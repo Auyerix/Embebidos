@@ -1,0 +1,10 @@
+23:21:37 **** Incremental Build of configuration Debug for project Clase02_Opc ****
+make -j1 all 
+arm-none-eabi-size   Clase02_Opc.elf 
+   text	   data	    bss	    dec	    hex	filename
+   8064	     40	   1640	   9744	   2610	Clase02_Opc.elf
+Finished building: default.size.stdout
+ 
+
+23:21:38 Build Finished. 0 errors, 0 warnings. (took 1s.341ms)
+

@@ -1,0 +1,10 @@
+23:19:19 **** Build of configuration Debug for project Clase02 ****
+make -j1 all 
+arm-none-eabi-size   Clase02.elf 
+   text	   data	    bss	    dec	    hex	filename
+   7848	     20	   1636	   9504	   2520	Clase02.elf
+Finished building: default.size.stdout
+ 
+
+23:19:21 Build Finished. 0 errors, 0 warnings. (took 1s.325ms)
+
