@@ -1,0 +1,10 @@
+10:16:50 **** Incremental Build of configuration Debug for project Clase02_Revision ****
+make -j1 all 
+arm-none-eabi-size   Clase02_Revision.elf 
+   text	   data	    bss	    dec	    hex	filename
+   8072	     40	   1640	   9752	   2618	Clase02_Revision.elf
+Finished building: default.size.stdout
+ 
+
+10:16:51 Build Finished. 0 errors, 0 warnings. (took 1s.84ms)
+
