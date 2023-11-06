@@ -1,7 +1,7 @@
 #include "API_delay.h"
 #include "stm32f4xx_hal.h"
 
-//Función donde se alojarán los datos del retardo
+
 void delayInit( delay_t * delay, tick_t duration ){
 
 		delay->duration = duration;
@@ -9,7 +9,7 @@ void delayInit( delay_t * delay, tick_t duration ){
 		delay->startTime = 0;
 
 }
-//Función de disparo del retardo: Retorna: 1= tiempo cumplido 0: no alcanzo el tiempo asignado
+
 bool_t delayRead( delay_t * delay ){
 
 		if(delay->running == false){
@@ -31,7 +31,7 @@ bool_t delayRead( delay_t * delay ){
 
 
 	}
-//Función de cambio de duracion de tiempo de delay existente
+
 void delayWrite( delay_t * delay, tick_t duration ){
 
 		delay->duration = duration;

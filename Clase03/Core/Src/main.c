@@ -22,6 +22,13 @@
 /* Private includes ----------------------------------------------------------*/
 /* USER CODE BEGIN Includes */
 
+#include <stdint.h>
+#include <stdbool.h>
+
+/*---------------------------------------------------------------------------------------------------*/
+/*Archivo de cabezera donde se incluyen las funciones de retardo no bloqueante                       */
+/*---------------------------------------------------------------------------------------------------*/
+
 #include "API_delay.h"
 
 /* USER CODE END Includes */
@@ -34,6 +41,8 @@
 /* Private define ------------------------------------------------------------*/
 /* USER CODE BEGIN PD */
 
+#define DUTY 2 //Se utiliza ya que el duty cycle será 50%, tiene que hacer dos veces el toggle
+
 /* USER CODE END PD */
 
 /* Private macro -------------------------------------------------------------*/
@@ -45,18 +54,21 @@
 UART_HandleTypeDef huart2;
 
 /* USER CODE BEGIN PV */
-uint8_t btn_pressed = 0;
+uint8_t btn_pressed = 0; // para futuras implementaciones
 uint16_t timer = 500;
 
+/*---------------------------------------------------------------------------------------------------*/
+/*Definición de repeticiones y tiempo                                                                */
+/*Matriz de definición de pares cantidad de ciclos,tiempo en ms (período)                            */
+/* ejemplo hardcodeado 5 repetiiones 1000, 200 y 100 ms                                              */
+/*---------------------------------------------------------------------------------------------------*/
 
-//Definición de repeticiones y tiempo
-
-//Matriz de definición de pares ciclos, ms
 uint16_t settings[3][3] = {{5,1000},{5,200},{5,100}};
 
-uint8_t count = 0;
-//step define en que paso está de las distintas alternativas
-uint8_t step = 1;
+uint8_t count = 0; //Cuenta la cantidad de repeticiones
+
+
+uint8_t step = 1; // definición de que paso está en los distitas pares repetición / tiempo
 
 /* USER CODE END PV */
 
@@ -80,11 +92,24 @@ static void MX_USART2_UART_Init(void);
 int main(void)
 {
   /* USER CODE BEGIN 1 */
+
 	//Definiciones de distintas instancias de la estructura delay_t
 	delay_t delay01;
+	/*---------------------------------------------------------------------------------------------------*/
+	/*Ajuste de dutycicle de 50%, togglerá el bit en el 50% del tiempo establecido en la matriz de       */
+	/*configuración. Para eso se divide el tiempo seteado por dos                                        */
+	/*---------------------------------------------------------------------------------------------------*/
+
+	settings[0][1] = settings[0][1] >>1;
+	settings[1][1] = settings[1][1] >>1;
+	settings[2][1] = settings[2][1] >>1;
 
 
-	// definición de delay01 según matriz de configuracion (inicia con el valor del primer par
+	/*---------------------------------------------------------------------------------------------------*/
+	/*Llamado a la función delayInit con un valor de instancia de la estructura y con un primer valor    */
+	/*de duración                                                                                        */
+	/*---------------------------------------------------------------------------------------------------*/
+
 	delayInit(&delay01,settings[0][1]);
 
 
@@ -125,21 +150,21 @@ int main(void)
 		  HAL_GPIO_TogglePin(LD2_GPIO_Port, LD2_Pin);
 		  count = count + 1;
 		  if(step==1){
-			  if(count==settings[0][0]*2){
+			  if(count==settings[0][0]*DUTY){
 				  step = 2;
 				  count = 0;
 				  delayWrite(&delay01,settings[1][1]);
 			  }
 		  }
 		  if(step==2){
-			  if(count==settings[1][0]*2){
+			  if(count==settings[1][0]*DUTY){
 				  step = 3;
 				  count = 0;
 				  delayWrite(&delay01,settings[2][1]);
 			  }
 		  }
 		  if(step==3){
-			  if(count==settings[2][0]*2){
+			  if(count==settings[2][0]*DUTY){
 				  step = 1;
 		 		  count = 0;
 		 		 delayWrite(&delay01,settings[0][1]);
