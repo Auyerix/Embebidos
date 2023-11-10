@@ -7,3 +7,7 @@ AC2
 Buffer
 test
 Temperature
+delay02.startTime
+delay02.duration
+delay02.running
+debounceState

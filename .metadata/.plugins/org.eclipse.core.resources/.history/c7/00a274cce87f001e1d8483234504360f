@@ -1,0 +1,91 @@
+#include "API_delay.h"
+#include "stm32f4xx_hal.h"
+#include "API_debounce.h"
+#include "stm32f4xx_hal_gpio.h"
+
+
+debounceState_t debounceState;
+delay_t delay02;
+
+
+
+void debounceFSM_init(void){
+
+	debounceState = BUTTON_UP;
+
+}
+
+
+/*
+void debounceFSM_init(debounceState_t * debounceState){
+
+	debounceState = BUTTON_UP;
+
+
+}*/
+
+void debounceFSM_update(void){
+
+		switch(debounceState){
+
+		case BUTTON_UP:
+			//
+			if(HAL_GPIO_ReadPin(B1_GPIO_Port, B1_Pin)==1){
+				delayWrite(&delay02,40);
+				debounceState = BUTTON_FALLING;
+			}
+
+
+		break;
+
+		case BUTTON_FALLING:
+			//
+			if(delayRead(&delay02)==1 && HAL_GPIO_ReadPin(B1_GPIO_Port, B1_Pin)==1){
+				debounceState = BUTTON_DOWN;
+				buttonPressed();
+
+			}
+			if(delayRead(&delay02)==1 && HAL_GPIO_ReadPin(B1_GPIO_Port, B1_Pin)==0){
+				debounceState = BUTTON_UP;
+			}
+
+		break;
+
+		case BUTTON_DOWN:
+			if(HAL_GPIO_ReadPin(B1_GPIO_Port, B1_Pin)==0){
+				delayWrite(&delay02,40);
+				debounceState = BUTTON_RAISING;
+			}
+
+		break;
+
+		case BUTTON_RAISING:
+			if(delayRead(&delay02)==1 && HAL_GPIO_ReadPin(B1_GPIO_Port, B1_Pin)==0){
+				debounceState = BUTTON_UP;
+				buttonReleased();
+
+			}
+			if(delayRead(&delay02)==1 && HAL_GPIO_ReadPin(B1_GPIO_Port, B1_Pin)==1){
+				debounceState = BUTTON_DOWN;
+			}
+
+		break;
+
+		default:
+			debounceState = BUTTON_UP;
+
+
+
+		}
+
+
+}
+void buttonPressed(void){
+	HAL_GPIO_WritePin(LD2_GPIO_Port, LD2_Pin, true);
+
+}
+
+void buttonReleased(void){
+	HAL_GPIO_WritePin(LD2_GPIO_Port, LD2_Pin, false);
+
+}

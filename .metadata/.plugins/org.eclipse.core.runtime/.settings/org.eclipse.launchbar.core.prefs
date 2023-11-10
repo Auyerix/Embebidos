@@ -1,7 +1,7 @@
 LaunchTargetManager/org.eclipse.launchbar.core.launchTargetType.local,Local/arch=x86_64
 LaunchTargetManager/org.eclipse.launchbar.core.launchTargetType.local,Local/name=Local
 LaunchTargetManager/org.eclipse.launchbar.core.launchTargetType.local,Local/os=linux
-configDescList=org.eclipse.cdt.dsf.gdb.gdbRemotedescriptorType\:BMP180_F401RE,org.eclipse.cdt.dsf.gdb.gdbRemotedescriptorType\:Clase02_Opc,org.eclipse.cdt.dsf.gdb.gdbRemotedescriptorType\:Ej0_blinky,org.eclipse.cdt.dsf.gdb.gdbRemotedescriptorType\:Ej2_uart,org.eclipse.cdt.dsf.gdb.gdbRemotedescriptorType\:Test002,org.eclipse.cdt.dsf.gdb.gdbRemotedescriptorType\:Clase01,org.eclipse.cdt.dsf.gdb.gdbRemotedescriptorType\:Clase02,org.eclipse.cdt.dsf.gdb.gdbRemotedescriptorType\:3Led_on_F401RE,org.eclipse.cdt.dsf.gdb.gdbRemotedescriptorType\:Clase02_Revision,org.eclipse.cdt.dsf.gdb.gdbRemotedescriptorType\:BMP180_F4DISC_test,org.eclipse.cdt.dsf.gdb.gdbRemotedescriptorType\:PDM_Practica3 Debug,org.eclipse.cdt.dsf.gdb.gdbRemotedescriptorType\:PDM_Practica3-main,org.eclipse.cdt.dsf.gdb.gdbRemotedescriptorType\:I2C_Scanner
+configDescList=org.eclipse.cdt.dsf.gdb.gdbRemotedescriptorType\:Clase03,org.eclipse.cdt.dsf.gdb.gdbRemotedescriptorType\:BMP180_F401RE,org.eclipse.cdt.dsf.gdb.gdbRemotedescriptorType\:Clase02_Opc,org.eclipse.cdt.dsf.gdb.gdbRemotedescriptorType\:Ej0_blinky,org.eclipse.cdt.dsf.gdb.gdbRemotedescriptorType\:Ej2_uart,org.eclipse.cdt.dsf.gdb.gdbRemotedescriptorType\:Test002,org.eclipse.cdt.dsf.gdb.gdbRemotedescriptorType\:Clase01,org.eclipse.cdt.dsf.gdb.gdbRemotedescriptorType\:Clase02,org.eclipse.cdt.dsf.gdb.gdbRemotedescriptorType\:3Led_on_F401RE,org.eclipse.cdt.dsf.gdb.gdbRemotedescriptorType\:Clase02_Revision,org.eclipse.cdt.dsf.gdb.gdbRemotedescriptorType\:BMP180_F4DISC_test,org.eclipse.cdt.dsf.gdb.gdbRemotedescriptorType\:PDM_Practica3 Debug,org.eclipse.cdt.dsf.gdb.gdbRemotedescriptorType\:PDM_Practica3-main,org.eclipse.cdt.dsf.gdb.gdbRemotedescriptorType\:I2C_Scanner,org.eclipse.cdt.dsf.gdb.gdbRemotedescriptorType\:Clase04
 eclipse.preferences.version=1
 org.eclipse.cdt.dsf.gdb.gdbRemotedescriptorType\:3Led_on_F401RE/activeLaunchMode=run
 org.eclipse.cdt.dsf.gdb.gdbRemotedescriptorType\:3Led_on_F401RE/activeLaunchTarget=null\:---
@@ -10,6 +10,7 @@ org.eclipse.cdt.dsf.gdb.gdbRemotedescriptorType\:Clase01/activeLaunchMode=run
 org.eclipse.cdt.dsf.gdb.gdbRemotedescriptorType\:Clase01/activeLaunchTarget=null\:---
 org.eclipse.cdt.dsf.gdb.gdbRemotedescriptorType\:Clase02/activeLaunchMode=run
 org.eclipse.cdt.dsf.gdb.gdbRemotedescriptorType\:Clase03/activeLaunchMode=run
+org.eclipse.cdt.dsf.gdb.gdbRemotedescriptorType\:Clase04/activeLaunchMode=debug
 org.eclipse.cdt.dsf.gdb.gdbRemotedescriptorType\:Ej0_blinky/activeLaunchMode=debug
 org.eclipse.cdt.dsf.gdb.gdbRemotedescriptorType\:Ej0_blinky/activeLaunchTarget=null\:---
 org.eclipse.cdt.dsf.gdb.gdbRemotedescriptorType\:Ej1_pushButton/activeLaunchMode=run

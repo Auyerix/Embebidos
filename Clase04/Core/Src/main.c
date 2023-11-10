@@ -26,10 +26,12 @@
 #include <stdbool.h>
 
 /*---------------------------------------------------------------------------------------------------*/
-/*Archivo de cabezera donde se incluyen las funciones de retardo no bloqueante                       */
+/*Archivo de cabezera donde se incluyen las funciones de retardo no bloqueante y antirebote          */
 /*---------------------------------------------------------------------------------------------------*/
 
 #include "API_delay.h"
+#include "API_debounce.h"
+
 
 /* USER CODE END Includes */
 
@@ -41,7 +43,6 @@
 /* Private define ------------------------------------------------------------*/
 /* USER CODE BEGIN PD */
 
-#define DUTY 2 //Se utiliza ya que el duty cycle será 50%, tiene que hacer dos veces el toggle
 
 /* USER CODE END PD */
 
@@ -54,21 +55,8 @@
 UART_HandleTypeDef huart2;
 
 /* USER CODE BEGIN PV */
-uint8_t btn_pressed = 0; // para futuras implementaciones
-uint16_t timer = 500;
-
-/*---------------------------------------------------------------------------------------------------*/
-/*Definición de repeticiones y tiempo                                                                */
-/*Matriz de definición de pares cantidad de ciclos,tiempo en ms (período)                            */
-/* ejemplo hardcodeado 5 repetiiones 1000, 200 y 100 ms                                              */
-/*---------------------------------------------------------------------------------------------------*/
-
-uint16_t settings[3][3] = {{5,1000},{5,200},{5,100}};
-
-uint8_t count = 0; //Cuenta la cantidad de repeticiones
 
 
-uint8_t step = 1; // definición de que paso está en los distitas pares repetición / tiempo
 
 /* USER CODE END PV */
 
@@ -93,28 +81,6 @@ int main(void)
 {
   /* USER CODE BEGIN 1 */
 
-	//Definiciones de distintas instancias de la estructura delay_t
-	delay_t delay01;
-	/*---------------------------------------------------------------------------------------------------*/
-	/*Ajuste de dutycicle de 50%, togglerá el bit en el 50% del tiempo establecido en la matriz de       */
-	/*configuración. Para eso se divide el tiempo seteado por dos                                        */
-	/*---------------------------------------------------------------------------------------------------*/
-
-	settings[0][1] = settings[0][1] >>1;
-	settings[1][1] = settings[1][1] >>1;
-	settings[2][1] = settings[2][1] >>1;
-
-
-	/*---------------------------------------------------------------------------------------------------*/
-	/*Llamado a la función delayInit con un valor de instancia de la estructura y con un primer valor    */
-	/*de duración                                                                                        */
-	/*---------------------------------------------------------------------------------------------------*/
-
-	delayInit(&delay01,settings[0][1]);
-
-
-	// Remover comentario para problar la carga directa de la función delayWrite
-	//delayWrite(&delay01,1000);
 
   /* USER CODE END 1 */
 
@@ -139,38 +105,16 @@ int main(void)
   MX_USART2_UART_Init();
   /* USER CODE BEGIN 2 */
 
+  //Inicialización de antirebote y carga de retardo no bloqueante en API_debounce.h
+  debounceFSM_init();
+
   /* USER CODE END 2 */
 
   /* Infinite loop */
   /* USER CODE BEGIN WHILE */
   while (1)
   {
-
-	  if(delayRead(&delay01)==1){
-		  HAL_GPIO_TogglePin(LD2_GPIO_Port, LD2_Pin);
-		  count = count + 1;
-		  if(step==1){
-			  if(count==settings[0][0]*DUTY){
-				  step = 2;
-				  count = 0;
-				  delayWrite(&delay01,settings[1][1]);
-			  }
-		  }
-		  if(step==2){
-			  if(count==settings[1][0]*DUTY){
-				  step = 3;
-				  count = 0;
-				  delayWrite(&delay01,settings[2][1]);
-			  }
-		  }
-		  if(step==3){
-			  if(count==settings[2][0]*DUTY){
-				  step = 1;
-		 		  count = 0;
-		 		 delayWrite(&delay01,settings[0][1]);
-		  	  }
-		  }		  																																																			  }
-
+	  debounceFSM_update();
 
 
 
