@@ -1,0 +1,17 @@
+21:39:16 **** Incremental Build of configuration Debug for project PDM_Practica3-main ****
+make -j1 all 
+arm-none-eabi-gcc "../Core/Src/main.c" -mcpu=cortex-m4 -std=gnu11 -g3 -DDEBUG -DUSE_HAL_DRIVER -DSTM32F401xC -c -I../Core/Inc -I../Drivers/STM32F4xx_HAL_Driver/Inc -I../Drivers/STM32F4xx_HAL_Driver/Inc/Legacy -I../Drivers/CMSIS/Device/ST/STM32F4xx/Include -I../Drivers/CMSIS/Include -I"/home/osboxes/Gustavo/Embebidos/PdM_workspace/PDM_Practica3-main/Drivers/API/Inc" -I"/home/osboxes/Gustavo/Embebidos/PdM_workspace/PDM_Practica3-main/Drivers/API/src" -O0 -ffunction-sections -fdata-sections -Wall -fstack-usage -fcyclomatic-complexity -MMD -MP -MF"Core/Src/main.d" -MT"Core/Src/main.o" --specs=nano.specs -mfpu=fpv4-sp-d16 -mfloat-abi=hard -mthumb -o "Core/Src/main.o"
+arm-none-eabi-gcc -o "PDM_Practica3-main.elf" @"objects.list"   -mcpu=cortex-m4 -T"/home/osboxes/Gustavo/Embebidos/PdM_workspace/PDM_Practica3-main/STM32F401RCTX_FLASH.ld" --specs=nosys.specs -Wl,-Map="PDM_Practica3-main.map" -Wl,--gc-sections -static --specs=nano.specs -mfpu=fpv4-sp-d16 -mfloat-abi=hard -mthumb -Wl,--start-group -lc -lm -Wl,--end-group
+Finished building target: PDM_Practica3-main.elf
+ 
+arm-none-eabi-size   PDM_Practica3-main.elf 
+   text	   data	    bss	    dec	    hex	filename
+  10600	    112	   1904	  12616	   3148	PDM_Practica3-main.elf
+Finished building: default.size.stdout
+ 
+arm-none-eabi-objdump -h -S  PDM_Practica3-main.elf  > "PDM_Practica3-main.list"
+Finished building: PDM_Practica3-main.list
+ 
+
+21:39:18 Build Finished. 0 errors, 0 warnings. (took 2s.64ms)
+

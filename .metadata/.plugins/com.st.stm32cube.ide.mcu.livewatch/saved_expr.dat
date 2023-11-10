@@ -2,3 +2,8 @@ btn_pressed
 LD2_Pin
 GPIO_PIN_5
 delay01.startTime
+AC1
+AC2
+Buffer
+test
+Temperature

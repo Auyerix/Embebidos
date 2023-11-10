@@ -1,0 +1,17 @@
+15:05:30 **** Incremental Build of configuration Debug for project BMP180_F401RE ****
+make -j1 all 
+arm-none-eabi-gcc "../Drivers/API/Src/BMP180.c" -mcpu=cortex-m4 -std=gnu11 -g3 -DDEBUG -DUSE_HAL_DRIVER -DSTM32F401xE -c -I../Core/Inc -I../Drivers/STM32F4xx_HAL_Driver/Inc -I../Drivers/STM32F4xx_HAL_Driver/Inc/Legacy -I../Drivers/CMSIS/Device/ST/STM32F4xx/Include -I../Drivers/CMSIS/Include -I"/home/osboxes/Gustavo/Embebidos/PdM_workspace/BMP180_F401RE/Drivers/API/Inc" -I"/home/osboxes/Gustavo/Embebidos/PdM_workspace/BMP180_F401RE/Drivers/API/Src" -O0 -ffunction-sections -fdata-sections -Wall -fstack-usage -fcyclomatic-complexity -MMD -MP -MF"Drivers/API/Src/BMP180.d" -MT"Drivers/API/Src/BMP180.o" --specs=nano.specs -mfpu=fpv4-sp-d16 -mfloat-abi=hard -mthumb -o "Drivers/API/Src/BMP180.o"
+arm-none-eabi-gcc -o "BMP180_F401RE.elf" @"objects.list"   -mcpu=cortex-m4 -T"/home/osboxes/Gustavo/Embebidos/PdM_workspace/BMP180_F401RE/STM32F401RETX_FLASH.ld" --specs=nosys.specs -Wl,-Map="BMP180_F401RE.map" -Wl,--gc-sections -static --specs=nano.specs -mfpu=fpv4-sp-d16 -mfloat-abi=hard -mthumb -Wl,--start-group -lc -lm -Wl,--end-group
+Finished building target: BMP180_F401RE.elf
+ 
+arm-none-eabi-size   BMP180_F401RE.elf 
+   text	   data	    bss	    dec	    hex	filename
+  11400	     20	   1748	  13168	   3370	BMP180_F401RE.elf
+Finished building: default.size.stdout
+ 
+arm-none-eabi-objdump -h -S  BMP180_F401RE.elf  > "BMP180_F401RE.list"
+Finished building: BMP180_F401RE.list
+ 
+
+15:05:32 Build Finished. 0 errors, 0 warnings. (took 1s.688ms)
+
