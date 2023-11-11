@@ -32,8 +32,9 @@ extern "C" {
 /* Private includes ----------------------------------------------------------*/
 /* USER CODE BEGIN Includes */
 
-	#include<stdint.h>
-	#include<stdbool.h>
+#include <stdint.h>
+#include <stdbool.h>
+
 
 /* USER CODE END Includes */
 
@@ -58,7 +59,11 @@ void Error_Handler(void);
 
 /* USER CODE BEGIN EFP */
 
-
+/*---------------------------------------------------------------------------------------------------*/
+/*función que permite blinkear el LED según los tiempos cargados en la estructura delay_t definida   */
+/*en API_delay.h                                                                                     */
+/*---------------------------------------------------------------------------------------------------*/
+void blinkLed(void);
 
 /* USER CODE END EFP */
 

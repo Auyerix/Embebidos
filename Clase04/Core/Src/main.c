@@ -21,14 +21,12 @@
 
 /* Private includes ----------------------------------------------------------*/
 /* USER CODE BEGIN Includes */
-
 #include <stdint.h>
 #include <stdbool.h>
 
 /*---------------------------------------------------------------------------------------------------*/
 /*Archivo de cabezera donde se incluyen las funciones de retardo no bloqueante y antirebote          */
 /*---------------------------------------------------------------------------------------------------*/
-
 #include "API_delay.h"
 #include "API_debounce.h"
 
@@ -38,10 +36,27 @@
 /* Private typedef -----------------------------------------------------------*/
 /* USER CODE BEGIN PTD */
 
+/*---------------------------------------------------------------------------------------------------*/
+/*Definicion de instancias de la estructura delay_t usado para Clase Blink de LED                    */
+/*---------------------------------------------------------------------------------------------------*/
+delay_t delay03;
+
 /* USER CODE END PTD */
 
 /* Private define ------------------------------------------------------------*/
 /* USER CODE BEGIN PD */
+
+/*---------------------------------------------------------------------------------------------------*/
+/*Definición de Macros de tiempos de blinky                                                          */
+/*---------------------------------------------------------------------------------------------------*/
+#define BLINK1	100
+#define BLINK2	500
+
+/*---------------------------------------------------------------------------------------------------*/
+/*Definición de Macros de estados de blinky                                                          */
+/*---------------------------------------------------------------------------------------------------*/
+#define BLINK_FLAG_HIGH	0
+#define BLINK_FLAG_LOW	1
 
 
 /* USER CODE END PD */
@@ -56,7 +71,8 @@ UART_HandleTypeDef huart2;
 
 /* USER CODE BEGIN PV */
 
-
+/*Variable Global usada solo para Debug */
+uint8_t blinkSpeed =0;
 
 /* USER CODE END PV */
 
@@ -81,6 +97,8 @@ int main(void)
 {
   /* USER CODE BEGIN 1 */
 
+	//inicio del timer de retardo para el blink
+	delayInit(&delay03,BLINK1);
 
   /* USER CODE END 1 */
 
@@ -114,7 +132,28 @@ int main(void)
   /* USER CODE BEGIN WHILE */
   while (1)
   {
+	  //Llamado a función de actualización de antirebote de pulsador
 	  debounceFSM_update();
+
+	  //Llamado a función permanente de manejo de blink
+	  //se colocó en main solo para mostrar encapsulamiento de la función readKey()
+	  blinkLed();
+
+	  //readKey está ubicada en API_debounce.C y es como el main.c puede saber si hubo un flanco descendente
+	  //sin entrar en las funciones de antirebote
+	  if(readKey()){
+		  if(blinkSpeed == BLINK_FLAG_HIGH){
+			  blinkSpeed =BLINK_FLAG_LOW;
+			  //Seteo de tiempo de blink 2
+			  delayWrite(&delay03, BLINK2 );
+		  }
+		  else{
+			  blinkSpeed = BLINK_FLAG_HIGH;
+			  //Seteo de tiempo de blink 1
+			  delayWrite(&delay03, BLINK1 );
+
+		  }
+	  }
 
 
 
@@ -244,6 +283,14 @@ static void MX_GPIO_Init(void)
 
 /* USER CODE BEGIN 4 */
 
+//Esta función podría ubicarse en un módulo separado
+void blinkLed(void){
+	if(delayRead(&delay03)==1){
+		HAL_GPIO_TogglePin(LD2_GPIO_Port, LD2_Pin);
+
+	}
+
+}
 
 
 /* USER CODE END 4 */

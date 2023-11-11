@@ -1,0 +1,12 @@
+11:44:26 **** Build of configuration Debug for project LDC_F401RE ****
+make -j1 all 
+arm-none-eabi-gcc "../Drivers/API/Src/API_delay.c" -mcpu=cortex-m4 -std=gnu11 -g3 -DDEBUG -DUSE_HAL_DRIVER -DSTM32F401xE -c -I../Core/Inc -I../Drivers/STM32F4xx_HAL_Driver/Inc -I../Drivers/STM32F4xx_HAL_Driver/Inc/Legacy -I../Drivers/CMSIS/Device/ST/STM32F4xx/Include -I../Drivers/CMSIS/Include -I"/home/osboxes/Gustavo/Embebidos/PdM_workspace/LDC_F401RE/Drivers/API/Inc" -I"/home/osboxes/Gustavo/Embebidos/PdM_workspace/LDC_F401RE/Drivers/API/Src" -O0 -ffunction-sections -fdata-sections -Wall -fstack-usage -fcyclomatic-complexity -MMD -MP -MF"Drivers/API/Src/API_delay.d" -MT"Drivers/API/Src/API_delay.o" --specs=nano.specs -mfpu=fpv4-sp-d16 -mfloat-abi=hard -mthumb -o "Drivers/API/Src/API_delay.o"
+../Drivers/API/Src/API_delay.c:2:10: fatal error: stm32f4xx_hal.h: No such file or directory
+    2 | #include "stm32f4xx_hal.h"
+      |          ^~~~~~~~~~~~~~~~~
+compilation terminated.
+make: *** [Drivers/API/Src/subdir.mk:22: Drivers/API/Src/API_delay.o] Error 1
+"make -j1 all" terminated with exit code 2. Build might be incomplete.
+
+11:44:26 Build Failed. 2 errors, 0 warnings. (took 842ms)
+

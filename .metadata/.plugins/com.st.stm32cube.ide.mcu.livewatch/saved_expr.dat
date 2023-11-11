@@ -11,3 +11,6 @@ delay02.startTime
 delay02.duration
 delay02.running
 debounceState
+keyPressed
+retorno
+blinkSpeed

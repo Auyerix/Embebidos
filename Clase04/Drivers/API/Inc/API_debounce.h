@@ -1,7 +1,10 @@
 #include <stdint.h>
 #include <stdbool.h>
 
-
+/*---------------------------------------------------------------------------------------------------*/
+/*Enumera los distintos estados de la máquina de elementos finito, dependiendo del estado toma       */
+/*acciones                                                                                           */
+/*---------------------------------------------------------------------------------------------------*/
 typedef enum{
 	BUTTON_UP,
 	BUTTON_FALLING,
@@ -9,14 +12,37 @@ typedef enum{
 	BUTTON_RAISING,
 } debounceState_t;
 
+/*---------------------------------------------------------------------------------------------------*/
+/*Definición de funcion debounceFSM_init                                                             */
+/*Carga de estado inicial de la función antirebote                                                   */
+/*---------------------------------------------------------------------------------------------------*/
+void debounceFSM_init(void);
 
-void debounceFSM_init(void);		// debe cargar el estado inicial
-void debounceFSM_update(void);	// debe leer las entradas, resolver la lógica de
-							// transición de estados y actualizar las salidas
-void buttonPressed(void);			// debe encender el LED
+/*---------------------------------------------------------------------------------------------------*/
+/*Leer las entradas, resuelve la lógica de transición de estados y actualiza las salidas             */
+/*---------------------------------------------------------------------------------------------------*/
+void debounceFSM_update(void);
+
+/*---------------------------------------------------------------------------------------------------*/
+/*Funciones que son llamadas cuando el botón es presionado o liberado, permitiendo realizar acciones */
+/*o setear variables para detectar los flancos ascendentes o descendentes                            */
+/*---------------------------------------------------------------------------------------------------*/
+void buttonPressed(void);		// debe encender el LED
 void buttonReleased(void);		// debe apagar el LED
 
-/* La función readKey debe leer una variable interna del módulo y devolver true o false si la tecla fue presionada.
- * Si devuelve true, debe resetear (poner en false) el estado de la variable.*/
+
+/*---------------------------------------------------------------------------------------------------*/
+/*Función pública ofrecida como interface para encapusular el módulo de debounce.c                   */
+/*El usuario deberá llamar a esta función periódicamente y la misma devolverá un pulso cada vez que  */
+/*ocurra una flanco descendente del pulsador, posterior al filtrado de las funciones debounce        */
+/*fuera del módulo ese pulso podrá activar determinada acción correspondiente a esta transición      */
+ /* sin haber accedido al módulo debounce.c                                                          */
+/*---------------------------------------------------------------------------------------------------*/
+/* La función readKey debe leer una variable interna del módulo y devolver true o false si la tecla  */
+/* fue presionada.                                                                                   */
+/* Si devuelve true, debe resetear (poner en false) el estado de la variable.                        */
+/*---------------------------------------------------------------------------------------------------*/
 bool_t readKey(void);
+
+
 

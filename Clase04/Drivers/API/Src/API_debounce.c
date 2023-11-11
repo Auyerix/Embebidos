@@ -2,7 +2,11 @@
 #include "stm32f4xx_hal.h"
 #include "API_debounce.h"
 
-//Definiciones de GPIO de la HAL
+/*---------------------------------------------------------------------------------------------------*/
+/*Definiciones de GPIO de la HAL para ser usados dentro de este módulo                               */
+/*---------------------------------------------------------------------------------------------------*/
+
+
 #define B1_Pin GPIO_PIN_13
 #define B1_GPIO_Port GPIOC
 #define USART_TX_Pin GPIO_PIN_2
@@ -18,21 +22,30 @@
 #define SWO_Pin GPIO_PIN_3
 #define SWO_GPIO_Port GPIOB
 
-//Definición del tiempo de antirebote (2000 ms para pruebas)
-#define DEBOUNCED_DELAY 2000
+/*---------------------------------------------------------------------------------------------------*/
+/*Definición del tiempo de antirebote (2000 ms para debugg de manera de observar los cambios de      */
+/*estado                                                                                             */
+/*En producción 40 ms                                                                                */
+/*---------------------------------------------------------------------------------------------------*/
+#define DEBOUNCED_DELAY 40
 
 
-//definición de una instancia de debounceState_t
-debounceState_t debounceState;
+
+//definición de una instancia de debounceState_t con los distintos estados de la máquina
+static debounceState_t debounceState;
 
 
-//Definiciones de distintas instancias de la estructura delay_t usado para Clase 04
+//Definiciones de distintas instancias de la estructura delay_t usado para Clase 04 en tiempo de antirebote
 delay_t delay02;
 
+
+//Definición de variable interna del módulo flag para detección de flanco descendente
+static bool_t keyPressed = 0;
 
 
 void debounceFSM_init(void){
 
+	//inicio de la máquina de estados
 	debounceState = BUTTON_UP;
 	//se inicia también el delay no retentivo
 	delayInit(&delay02,DEBOUNCED_DELAY);
@@ -101,16 +114,27 @@ void debounceFSM_update(void){
 
 }
 void buttonPressed(void){
-	HAL_GPIO_WritePin(LD2_GPIO_Port, LD2_Pin, true);
+	//HAL_GPIO_WritePin(LD2_GPIO_Port, LD2_Pin, true);  //utilizado en parte uno de la práctica
+	//seteo de flag para detección de flanco
+	keyPressed = 1;
 
 }
 
 void buttonReleased(void){
-	HAL_GPIO_WritePin(LD2_GPIO_Port, LD2_Pin, false);
+	//HAL_GPIO_WritePin(LD2_GPIO_Port, LD2_Pin, false);	//utilizado en parte uno de la práctica
 
 }
 
-/*if(delayRead(&delay02)==1){
-HAL_GPIO_TogglePin(LD2_GPIO_Port, LD2_Pin);
+bool_t readKey(void){
 
-}*/
+	if(keyPressed){
+		keyPressed = 0;
+		return 1;
+	}
+	if(keyPressed==0){
+		return 0;
+	}
+	return 0;
+}
+
+
