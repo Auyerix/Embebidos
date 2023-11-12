@@ -1,0 +1,115 @@
+20:26:19 **** Incremental Build of configuration Debug for project LCD_F401RE_16x2 ****
+make -j1 all 
+arm-none-eabi-gcc "../Core/Src/lcd16x2_i2c.c" -mcpu=cortex-m4 -std=gnu11 -g3 -DDEBUG -DUSE_HAL_DRIVER -DSTM32F401xE -c -I../Core/Inc -I../Drivers/STM32F4xx_HAL_Driver/Inc -I../Drivers/STM32F4xx_HAL_Driver/Inc/Legacy -I../Drivers/CMSIS/Device/ST/STM32F4xx/Include -I../Drivers/CMSIS/Include -I"/home/osboxes/Gustavo/Embebidos/PdM_workspace/LCD_F401RE_16x2/Drivers/API/Inc" -I"/home/osboxes/Gustavo/Embebidos/PdM_workspace/LCD_F401RE_16x2/Drivers/API/Src" -O0 -ffunction-sections -fdata-sections -Wall -fstack-usage -fcyclomatic-complexity -MMD -MP -MF"Core/Src/lcd16x2_i2c.d" -MT"Core/Src/lcd16x2_i2c.o" --specs=nano.specs -mfpu=fpv4-sp-d16 -mfloat-abi=hard -mthumb -o "Core/Src/lcd16x2_i2c.o"
+In file included from ../Core/Src/lcd16x2_i2c.c:8:
+../Core/Inc/lcd16x2_i2c.h:53:61: warning: "/*" within comment [-Wcomment]
+   53 |  * @brief Display ON/OFF, to hide all characters, but not cl/*
+      |                                                              
+In file included from ../Core/Inc/lcd16x2_i2c.h:60,
+                 from ../Core/Src/lcd16x2_i2c.c:8:
+../Core/Inc/lcd16x2_i2c.h:53:61: warning: "/*" within comment [-Wcomment]
+   53 |  * @brief Display ON/OFF, to hide all characters, but not cl/*
+      |                                                              
+../Core/Src/lcd16x2_i2c.c:52:13: error: redefinition of 'lcd16x2_i2c_sendCommand'
+   52 | static void lcd16x2_i2c_sendCommand(uint8_t command)
+      |             ^~~~~~~~~~~~~~~~~~~~~~~
+In file included from ../Core/Src/lcd16x2_i2c.c:8:
+../Core/Inc/lcd16x2_i2c.h:104:13: note: previous definition of 'lcd16x2_i2c_sendCommand' with type 'void(uint8_t)' {aka 'void(unsigned char)'}
+  104 | static void lcd16x2_i2c_sendCommand(uint8_t command)
+      |             ^~~~~~~~~~~~~~~~~~~~~~~
+../Core/Src/lcd16x2_i2c.c:66:13: error: redefinition of 'lcd16x2_i2c_sendData'
+   66 | static void lcd16x2_i2c_sendData(uint8_t data)
+      |             ^~~~~~~~~~~~~~~~~~~~
+In file included from ../Core/Src/lcd16x2_i2c.c:8:
+../Core/Inc/lcd16x2_i2c.h:118:13: note: previous definition of 'lcd16x2_i2c_sendData' with type 'void(uint8_t)' {aka 'void(unsigned char)'}
+  118 | static void lcd16x2_i2c_sendData(uint8_t data)
+      |             ^~~~~~~~~~~~~~~~~~~~
+../Core/Src/lcd16x2_i2c.c:85:6: error: redefinition of 'lcd16x2_i2c_init'
+   85 | bool lcd16x2_i2c_init(I2C_HandleTypeDef *pI2cHandle)
+      |      ^~~~~~~~~~~~~~~~
+In file included from ../Core/Src/lcd16x2_i2c.c:8:
+../Core/Inc/lcd16x2_i2c.h:137:6: note: previous definition of 'lcd16x2_i2c_init' with type '_Bool(I2C_HandleTypeDef *)'
+  137 | bool lcd16x2_i2c_init(I2C_HandleTypeDef *pI2cHandle)
+      |      ^~~~~~~~~~~~~~~~
+../Core/Src/lcd16x2_i2c.c:136:6: error: redefinition of 'lcd16x2_i2c_setCursor'
+  136 | void lcd16x2_i2c_setCursor(uint8_t row, uint8_t col)
+      |      ^~~~~~~~~~~~~~~~~~~~~
+In file included from ../Core/Src/lcd16x2_i2c.c:8:
+../Core/Inc/lcd16x2_i2c.h:188:6: note: previous definition of 'lcd16x2_i2c_setCursor' with type 'void(uint8_t,  uint8_t)' {aka 'void(unsigned char,  unsigned char)'}
+  188 | void lcd16x2_i2c_setCursor(uint8_t row, uint8_t col)
+      |      ^~~~~~~~~~~~~~~~~~~~~
+../Core/Src/lcd16x2_i2c.c:155:6: error: redefinition of 'lcd16x2_i2c_1stLine'
+  155 | void lcd16x2_i2c_1stLine(void)
+      |      ^~~~~~~~~~~~~~~~~~~
+In file included from ../Core/Src/lcd16x2_i2c.c:8:
+../Core/Inc/lcd16x2_i2c.h:207:6: note: previous definition of 'lcd16x2_i2c_1stLine' with type 'void(void)'
+  207 | void lcd16x2_i2c_1stLine(void)
+      |      ^~~~~~~~~~~~~~~~~~~
+../Core/Src/lcd16x2_i2c.c:162:6: error: redefinition of 'lcd16x2_i2c_2ndLine'
+  162 | void lcd16x2_i2c_2ndLine(void)
+      |      ^~~~~~~~~~~~~~~~~~~
+In file included from ../Core/Src/lcd16x2_i2c.c:8:
+../Core/Inc/lcd16x2_i2c.h:214:6: note: previous definition of 'lcd16x2_i2c_2ndLine' with type 'void(void)'
+  214 | void lcd16x2_i2c_2ndLine(void)
+      |      ^~~~~~~~~~~~~~~~~~~
+../Core/Src/lcd16x2_i2c.c:170:6: error: redefinition of 'lcd16x2_i2c_TwoLines'
+  170 | void lcd16x2_i2c_TwoLines(void)
+      |      ^~~~~~~~~~~~~~~~~~~~
+In file included from ../Core/Src/lcd16x2_i2c.c:8:
+../Core/Inc/lcd16x2_i2c.h:222:6: note: previous definition of 'lcd16x2_i2c_TwoLines' with type 'void(void)'
+  222 | void lcd16x2_i2c_TwoLines(void)
+      |      ^~~~~~~~~~~~~~~~~~~~
+../Core/Src/lcd16x2_i2c.c:174:6: error: redefinition of 'lcd16x2_i2c_OneLine'
+  174 | void lcd16x2_i2c_OneLine(void)
+      |      ^~~~~~~~~~~~~~~~~~~
+In file included from ../Core/Src/lcd16x2_i2c.c:8:
+../Core/Inc/lcd16x2_i2c.h:226:6: note: previous definition of 'lcd16x2_i2c_OneLine' with type 'void(void)'
+  226 | void lcd16x2_i2c_OneLine(void)
+      |      ^~~~~~~~~~~~~~~~~~~
+../Core/Src/lcd16x2_i2c.c:182:6: error: redefinition of 'lcd16x2_i2c_cursorShow'
+  182 | void lcd16x2_i2c_cursorShow(bool state)
+      |      ^~~~~~~~~~~~~~~~~~~~~~
+In file included from ../Core/Src/lcd16x2_i2c.c:8:
+../Core/Inc/lcd16x2_i2c.h:234:6: note: previous definition of 'lcd16x2_i2c_cursorShow' with type 'void(_Bool)'
+  234 | void lcd16x2_i2c_cursorShow(bool state)
+      |      ^~~~~~~~~~~~~~~~~~~~~~
+../Core/Src/lcd16x2_i2c.c:197:6: error: redefinition of 'lcd16x2_i2c_clear'
+  197 | void lcd16x2_i2c_clear(void)
+      |      ^~~~~~~~~~~~~~~~~
+In file included from ../Core/Src/lcd16x2_i2c.c:8:
+../Core/Inc/lcd16x2_i2c.h:249:6: note: previous definition of 'lcd16x2_i2c_clear' with type 'void(void)'
+  249 | void lcd16x2_i2c_clear(void)
+      |      ^~~~~~~~~~~~~~~~~
+../Core/Src/lcd16x2_i2c.c:206:6: error: redefinition of 'lcd16x2_i2c_display'
+  206 | void lcd16x2_i2c_display(bool state)
+      |      ^~~~~~~~~~~~~~~~~~~
+In file included from ../Core/Src/lcd16x2_i2c.c:8:
+../Core/Inc/lcd16x2_i2c.h:258:6: note: previous definition of 'lcd16x2_i2c_display' with type 'void(_Bool)'
+  258 | void lcd16x2_i2c_display(bool state)
+      |      ^~~~~~~~~~~~~~~~~~~
+../Core/Src/lcd16x2_i2c.c:221:6: error: redefinition of 'lcd16x2_i2c_shiftRight'
+  221 | void lcd16x2_i2c_shiftRight(uint8_t offset)
+      |      ^~~~~~~~~~~~~~~~~~~~~~
+In file included from ../Core/Src/lcd16x2_i2c.c:8:
+../Core/Inc/lcd16x2_i2c.h:273:6: note: previous definition of 'lcd16x2_i2c_shiftRight' with type 'void(uint8_t)' {aka 'void(unsigned char)'}
+  273 | void lcd16x2_i2c_shiftRight(uint8_t offset)
+      |      ^~~~~~~~~~~~~~~~~~~~~~
+../Core/Src/lcd16x2_i2c.c:232:6: error: redefinition of 'lcd16x2_i2c_shiftLeft'
+  232 | void lcd16x2_i2c_shiftLeft(uint8_t offset)
+      |      ^~~~~~~~~~~~~~~~~~~~~
+In file included from ../Core/Src/lcd16x2_i2c.c:8:
+../Core/Inc/lcd16x2_i2c.h:284:6: note: previous definition of 'lcd16x2_i2c_shiftLeft' with type 'void(uint8_t)' {aka 'void(unsigned char)'}
+  284 | void lcd16x2_i2c_shiftLeft(uint8_t offset)
+      |      ^~~~~~~~~~~~~~~~~~~~~
+../Core/Src/lcd16x2_i2c.c:243:6: error: redefinition of 'lcd16x2_i2c_printf'
+  243 | void lcd16x2_i2c_printf(const char* str, ...)
+      |      ^~~~~~~~~~~~~~~~~~
+In file included from ../Core/Src/lcd16x2_i2c.c:8:
+../Core/Inc/lcd16x2_i2c.h:295:6: note: previous definition of 'lcd16x2_i2c_printf' with type 'void(const char *, ...)'
+  295 | void lcd16x2_i2c_printf(const char* str, ...)
+      |      ^~~~~~~~~~~~~~~~~~
+make: *** [Core/Src/subdir.mk:40: Core/Src/lcd16x2_i2c.o] Error 1
+"make -j1 all" terminated with exit code 2. Build might be incomplete.
+
+20:26:20 Build Failed. 15 errors, 2 warnings. (took 1s.547ms)
+
