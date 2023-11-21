@@ -1,4 +1,4 @@
-10:16:50 **** Incremental Build of configuration Debug for project Clase02_Revision ****
+10:33:02 **** Build of configuration Debug for project Clase02_Revision ****
 make -j1 all 
 arm-none-eabi-size   Clase02_Revision.elf 
    text	   data	    bss	    dec	    hex	filename
@@ -6,5 +6,5 @@ arm-none-eabi-size   Clase02_Revision.elf
 Finished building: default.size.stdout
  
 
-10:16:51 Build Finished. 0 errors, 0 warnings. (took 1s.84ms)
+10:33:03 Build Finished. 0 errors, 0 warnings. (took 766ms)
 
