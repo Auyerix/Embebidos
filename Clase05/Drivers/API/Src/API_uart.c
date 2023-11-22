@@ -5,6 +5,7 @@
 #include "stm32f4xx_hal.h"
 #include <stdio.h>
 
+//instancia de la  estructura: huart2
 static UART_HandleTypeDef huart2;
 
 
@@ -26,14 +27,12 @@ bool_t uartInit(void){
 		char parametros[100];
 
 
-		sprintf(parametros,"BaudRate=%ld WordLength=%ld StopBits=%ld \n",huart2.Init.BaudRate,huart2.Init.WordLength,huart2.Init.StopBits  );
+		sprintf(parametros,"\nBaudRate=%ld\nWordLength=%ld\nStopBits=%ld\nParity=%ld \n",huart2.Init.BaudRate,huart2.Init.WordLength,huart2.Init.StopBits,huart2.Init.Parity);
 
 		HAL_UART_Transmit(&huart2, parametros , sizeof(parametros), 100);
 
-
-
-
-
+		//Demora bloqueante para observar los valores de la uart
+		HAL_Delay(2000);
 
 
 		return true;

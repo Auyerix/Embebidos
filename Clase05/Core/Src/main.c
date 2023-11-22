@@ -78,8 +78,9 @@ delay_t delay03;
 /*Variable Global usada solo para Debug */
 uint8_t blinkSpeed =0;
 
-
+//Cadena que se transmitirá hasta el caracter '\0'
 uint8_t buffer1[] = "Hola mundo lindo";
+//Cadena que se transmitirá hasta la cantidad de caracteres pasados como parámetro de función
 uint8_t buffer2[] = "Transmitido con limite de bytes";
 
 /* USER CODE END PV */
@@ -156,11 +157,10 @@ int main(void)
   while (1)
   {
 
-	  //HAL_UART_Transmit(&huart2, (const uint8_t*) "Hola\n", sizeof("Hola\n"), 1000);
-
-	  HAL_Delay(500);
+	  //Envio hasta \n
 	  uartSendString(buffer1);
-	  HAL_Delay(500);
+
+	  //Envio hasta lo indicado en BUFFER_LENGHT
 	  uartSendStringSize(buffer2, BUFFER_LENGHT);
 
 	  //Llamado a función de actualización de antirebote de pulsador
