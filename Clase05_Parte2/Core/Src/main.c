@@ -83,9 +83,9 @@ uint8_t buffer1[] = "Hola mundo lindo";
 //Cadena que se transmitirá hasta la cantidad de caracteres pasados como parámetro de función
 uint8_t buffer2[] = "Transmitido con limite de bytes";
 //Cadena que se transmitirá al liberar la tecla
-uint8_t buffer3[] = "Tecla Liberada\n";
+uint8_t buffer3[] = "Tecla Liberada\n\r";
 //Cadena que se transmitirá al presionar la tecla
-uint8_t buffer4[] = "Tecla Presionada\n";
+uint8_t buffer4[] = "Tecla Presionada\n\r";
 
 
 /* USER CODE END PV */

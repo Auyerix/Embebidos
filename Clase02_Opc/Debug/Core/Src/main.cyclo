@@ -1,8 +1,0 @@
-../Core/Src/main.c:78:5:main	8
-../Core/Src/main.c:162:6:SystemClock_Config	3
-../Core/Src/main.c:209:13:MX_USART2_UART_Init	2
-../Core/Src/main.c:242:13:MX_GPIO_Init	1
-../Core/Src/main.c:277:7:delayInit	1
-../Core/Src/main.c:285:9:delayRead	3
-../Core/Src/main.c:307:7:delayWrite	1
-../Core/Src/main.c:321:6:Error_Handler	1
