@@ -1,6 +1,7 @@
 #include <stdint.h>
 #include <stdbool.h>
 
+
 /*---------------------------------------------------------------------------------------------------*/
 /*Enumera los distintos estados de la máquina de elementos finito, dependiendo del estado toma       */
 /*acciones                                                                                           */

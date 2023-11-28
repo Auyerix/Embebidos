@@ -1,0 +1,84 @@
+/*
+ * API_screen_managment.c
+ *
+ *  Created on: Nov 27, 2023
+ *      Author: osboxes
+ */
+
+#include "API_screen_managment.h"
+#include "API_delay.h"
+#include "stm32f4xx_hal.h"
+#include "API_debounce.h"
+#include "main.h"
+
+//definición de una instancia de screenState_t con los distintos estados de la máquina
+static screenState_t screenState;
+
+
+void screenFSM_init(void){
+
+	//inicio de la máquina de estados
+	screenState = SCREEN_MAIN;
+
+}
+
+void screenFSM_update(void){
+
+
+		switch(screenState){
+
+		case BUTTON_UP:
+
+			if(HAL_GPIO_ReadPin(B1_GPIO_Port, B1_Pin)==0){
+
+				debounceState = BUTTON_FALLING;
+			}
+
+		break;
+
+		case BUTTON_FALLING:
+
+			if(delayRead(&delay02)==1){
+				if(HAL_GPIO_ReadPin(B1_GPIO_Port, B1_Pin)==0){
+					debounceState = BUTTON_DOWN;
+					buttonPressed();
+				}
+				if(HAL_GPIO_ReadPin(B1_GPIO_Port, B1_Pin)==1){
+					debounceState = BUTTON_UP;
+				}
+
+			}
+
+		break;
+
+		case BUTTON_DOWN:
+
+			if(HAL_GPIO_ReadPin(B1_GPIO_Port, B1_Pin)==1){
+
+				debounceState = BUTTON_RAISING;
+			}
+
+		break;
+
+		case BUTTON_RAISING:
+
+			if(delayRead(&delay02)==1){
+				if(HAL_GPIO_ReadPin(B1_GPIO_Port, B1_Pin)==1){
+					debounceState = BUTTON_UP;
+					buttonReleased();
+				}
+				if(HAL_GPIO_ReadPin(B1_GPIO_Port, B1_Pin)==0){
+					debounceState = BUTTON_DOWN;
+				}
+
+			}
+
+		break;
+
+		default:
+		debounceState = BUTTON_UP;
+
+		}
+
+
+}

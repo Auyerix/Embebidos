@@ -1,5 +1,0 @@
-../Drivers/API/Src/API_debounce.c:46:6:debounceFSM_init	8	static
-../Drivers/API/Src/API_debounce.c:56:6:debounceFSM_update	8	static
-../Drivers/API/Src/API_debounce.c:116:6:buttonPressed	4	static
-../Drivers/API/Src/API_debounce.c:123:6:buttonReleased	4	static
-../Drivers/API/Src/API_debounce.c:128:8:readKey	4	static

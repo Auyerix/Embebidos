@@ -1,0 +1,2 @@
+../Drivers/API/Src/API_screen_managment.c:17:6:screenFSM_init	1
+../Drivers/API/Src/API_screen_managment.c:24:6:screenFSM_update	8

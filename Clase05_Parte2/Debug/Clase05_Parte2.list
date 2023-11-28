@@ -1937,7 +1937,7 @@ void uartSendString(uint8_t * pstring){
  8000d12:	73fb      	strb	r3, [r7, #15]
 
 	//Cuenta de caracteres en la cadena apuntada por pstring
-	//importante armar rutina de while no bloqueante
+	//importante armar rutina de while no bloqueante con el if y break (implementado)
 	while (* pstring++ !='\0'){
  8000d14:	e002      	b.n	8000d1c <uartSendString+0x14>
 		i++;

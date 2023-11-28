@@ -1,0 +1,51 @@
+/*
+ * API_screen_managment.c
+ *
+ *  Created on: Nov 27, 2023
+ *      Author: osboxes
+ */
+
+#include "API_screen_managment.h"
+#include "stm32f4xx_hal.h"
+#include "main.h"
+
+//definición de una instancia de screenState_t con los distintos estados de la máquina
+static screenState_t screenState;
+
+
+void screenFSM_init(void){
+
+	//inicio de la máquina de estados
+	screenState = SCREEN_MAIN;
+
+}
+
+void screenFSM_update(void){
+
+
+		switch(screenState){
+
+		case SCREEN_MAIN:
+
+
+		break;
+
+		case SCREEN_ALARMS:
+
+
+		break;
+
+		case SCREEN_HISTORICAL:
+
+
+		break;
+
+
+
+		default:
+		screenState = SCREEN_MAIN;
+
+		}
+
+
+}

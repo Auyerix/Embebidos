@@ -15,3 +15,8 @@ keyPressed
 retorno
 blinkSpeed
 Temperature
+Pressure
+Altitude
+AC3
+AC4
+screenState
