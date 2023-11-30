@@ -73,3 +73,28 @@ void lcd_send_string (char *str)
 {
 	while (*str) lcd_send_data (*str++);
 }
+
+void welcome_message(void){
+
+	//Mensaje de Bienvenida PASAR A LA API
+	//el or se hace según la posición de memoria de inicio
+	//depende de la tabla de memoria que es distinta en 16x4 y 20x4
+	//ver https://controllerstech.com/lcd-20x4-using-i2c-with-stm32/
+
+	lcd_clear();
+
+	lcd_send_cmd (0x80|0x00);
+	lcd_send_string("Bienvenida");
+
+	lcd_send_cmd (0x80|0x40);
+	lcd_send_string("linea2");
+
+	lcd_send_cmd (0x80|0x10);
+	lcd_send_string("linea3");
+
+	lcd_send_cmd (0x80|0x50);
+	lcd_send_string("linea4");
+
+	HAL_Delay(2000);
+
+}

@@ -1,13 +1,18 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <section name="Workbench">
 	<section name="org.eclipse.ui.texteditor.FindReplaceDialog">
-		<item key="selection" value="debounce"/>
+		<item key="selection" value=""/>
 		<item key="wrap" value="true"/>
 		<item key="casesensitive" value="false"/>
 		<item key="wholeword" value="false"/>
 		<item key="incremental" value="false"/>
 		<item key="isRegEx" value="false"/>
 		<list key="findhistory">
+			<item value="HAL_TIM_ENABLE_IT(&amp;"/>
+			<item value="/* Enable the TIM Capture/Compare 1 interrupt */"/>
+			<item value="HAL_TIM_OC_Start_IT"/>
+			<item value="HAL_GPIO_TogglePin"/>
+			<item value="TIM10"/>
 			<item value="debounce"/>
 			<item value="HAL_BUSY"/>
 			<item value="close_r"/>
@@ -17,8 +22,8 @@
 		</list>
 	</section>
 	<section name="org.eclipse.ui.texteditor.FindReplaceDialog_dialogBounds">
-		<item key="DIALOG_X_ORIGIN" value="1253"/>
-		<item key="DIALOG_Y_ORIGIN" value="166"/>
+		<item key="DIALOG_X_ORIGIN" value="20"/>
+		<item key="DIALOG_Y_ORIGIN" value="20"/>
 		<item key="DIALOG_WIDTH" value="363"/>
 		<item key="DIALOG_HEIGHT" value="437"/>
 		<item key="DIALOG_FONT_NAME" value="1|Ubuntu|11.0|0|GTK|1|"/>

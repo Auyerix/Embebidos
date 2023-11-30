@@ -1,3 +1,0 @@
-../Drivers/API/Src/API_uart.c:12:8:uartInit	2
-../Drivers/API/Src/API_uart.c:45:6:uartSendString	2
-../Drivers/API/Src/API_uart.c:66:6:uartSendStringSize	1

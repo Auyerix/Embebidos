@@ -61,7 +61,7 @@ int32_t Temp = 0;
 
 
 
-void read_calliberation_data (void)
+void read_calibration_data(void)
 {
 	uint8_t Callib_Data[22] = {0};
 	uint16_t Callib_Start = 0xAA;
@@ -164,7 +164,7 @@ float BMP180_GetAlt (int oss)
 
 void BMP180_Start (void)
 {
-	read_calliberation_data();
+	read_calibration_data();
 }
 
 // Get ID by GA

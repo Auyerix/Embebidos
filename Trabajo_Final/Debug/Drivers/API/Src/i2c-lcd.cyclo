@@ -3,3 +3,4 @@
 ../Drivers/API/Src/i2c-lcd.c:35:6:lcd_clear	2
 ../Drivers/API/Src/i2c-lcd.c:44:6:lcd_init	1
 ../Drivers/API/Src/i2c-lcd.c:72:6:lcd_send_string	2
+../Drivers/API/Src/i2c-lcd.c:77:6:welcome_message	1

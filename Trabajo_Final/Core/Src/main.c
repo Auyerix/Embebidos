@@ -21,6 +21,7 @@
 
 /* Private includes ----------------------------------------------------------*/
 /* USER CODE BEGIN Includes */
+//#include <stdio.h>
 #include <stdint.h>
 #include <stdbool.h>
 #include <string.h>
@@ -77,9 +78,10 @@ void SystemClock_Config(void);
 static void MX_GPIO_Init(void);
 //static void MX_USART2_UART_Init(void);
 static void MX_I2C1_Init(void);
-static void MX_TIM10_Init(void);
+	//AAstatic void MX_TIM10_Init(void);
 /* USER CODE BEGIN PFP */
 
+/*
 void HAL_TIM_PeriodElapsedCallback(TIM_HandleTypeDef *htim){
 
 	static uint16_t count = 0;
@@ -89,7 +91,7 @@ void HAL_TIM_PeriodElapsedCallback(TIM_HandleTypeDef *htim){
 	}
 	count++;
 
-}
+}*/
 
 /* USER CODE END PFP */
 
@@ -134,10 +136,10 @@ int main(void)
   MX_GPIO_Init();
   //MX_USART2_UART_Init();
   MX_I2C1_Init();
-  MX_TIM10_Init();
+  	  //AAMX_TIM10_Init();
   /* USER CODE BEGIN 2 */
 
-  HAL_Delay (2000);
+  HAL_Delay (1000);
 
   //Inicio y lectura de calibración de sensor
   BMP180_Start();
@@ -149,31 +151,40 @@ int main(void)
   void screenFSM_init(void);
 
   //Inicialización de uart2 implementada en API_uart.c Si hay error manda a Error_Handler()
-   if(!uartInit()){
+/*   if(!uartInit()){
  	  Error_Handler();
-   }
+   }*/
 
    //Inicio LCD
-   void lcd_init(void);
+   lcd_init();
 
-   //Mensaje de Bienvenida PASAR A LA API
-   //el or se hace según la posición de memoria de inicio
-   //depende de la tabla de memoria que es distinta en 16x4 y 20x4
-   //ver https://controllerstech.com/lcd-20x4-using-i2c-with-stm32/
 
-   lcd_clear();
+ //  void welcome_message(void);
 
-   lcd_send_cmd (0x80|0x00);
-   lcd_send_string("HELLO WORLD");
+	//Mensaje de Bienvenida PASAR A LA API
+	//el or se hace según la posición de memoria de inicio
+	//depende de la tabla de memoria que es distinta en 16x4 y 20x4
+	//ver https://controllerstech.com/lcd-20x4-using-i2c-with-stm32/
 
-   lcd_send_cmd (0x80|0x40);
-   lcd_send_string("LCD 16x4 DEMO");
+	lcd_clear();
 
-   lcd_send_cmd (0x80|0x10);
-   lcd_send_string("BY");
+	lcd_send_cmd (0x80|0x00);
+	lcd_send_string("HOLA1");
 
-   lcd_send_cmd (0x80|0x50);
-   lcd_send_string("Gustavo");
+	lcd_send_cmd (0x80|0x40);
+	lcd_send_string("HOLA2");
+
+	lcd_send_cmd (0x80|0x10);
+	lcd_send_string("HOLA3 nuevo");
+
+	lcd_send_cmd (0x80|0x50);
+	lcd_send_string("Autor: G. Auyero");
+
+	HAL_Delay(1000);
+
+	welcome_message();
+
+
 
   //Agrego esta función para arrancar el timer 10 y generar una interrupción a su final
    //OJO QUE LA FUNCION ESTA ARMADA MAS ARRIBA, LUEGO CORREGIR
@@ -200,6 +211,7 @@ int main(void)
 	  //Llamado a la función de actualización de screen managment
 
 	  screenFSM_update();
+
 
 /*	  if(readKey()){
 		  HAL_GPIO_TogglePin(LD2_GPIO_Port, LD2_Pin);
@@ -276,7 +288,7 @@ static void MX_I2C1_Init(void)
 
   /* USER CODE END I2C1_Init 1 */
   hi2c1.Instance = I2C1;
-  hi2c1.Init.ClockSpeed = 100000;
+  hi2c1.Init.ClockSpeed = 400000;
   hi2c1.Init.DutyCycle = I2C_DUTYCYCLE_2;
   hi2c1.Init.OwnAddress1 = 0;
   hi2c1.Init.AddressingMode = I2C_ADDRESSINGMODE_7BIT;
@@ -299,31 +311,31 @@ static void MX_I2C1_Init(void)
   * @param None
   * @retval None
   */
-static void MX_TIM10_Init(void)
-{
-
-  /* USER CODE BEGIN TIM10_Init 0 */
-
-  /* USER CODE END TIM10_Init 0 */
-
-  /* USER CODE BEGIN TIM10_Init 1 */
-
-  /* USER CODE END TIM10_Init 1 */
-  htim10.Instance = TIM10;
-  htim10.Init.Prescaler = 9999;
-  htim10.Init.CounterMode = TIM_COUNTERMODE_UP;
-  htim10.Init.Period = 8399;
-  htim10.Init.ClockDivision = TIM_CLOCKDIVISION_DIV1;
-  htim10.Init.AutoReloadPreload = TIM_AUTORELOAD_PRELOAD_DISABLE;
-  if (HAL_TIM_Base_Init(&htim10) != HAL_OK)
-  {
-    Error_Handler();
-  }
-  /* USER CODE BEGIN TIM10_Init 2 */
-
-  /* USER CODE END TIM10_Init 2 */
-
-}
+//static void MX_TIM10_Init(void)
+//{
+//
+//  /* USER CODE BEGIN TIM10_Init 0 */
+//
+//  /* USER CODE END TIM10_Init 0 */
+//
+//  /* USER CODE BEGIN TIM10_Init 1 */
+//
+//  /* USER CODE END TIM10_Init 1 */
+//  htim10.Instance = TIM10;
+//  htim10.Init.Prescaler = 9999;
+//  htim10.Init.CounterMode = TIM_COUNTERMODE_UP;
+//  htim10.Init.Period = 8399;
+//  htim10.Init.ClockDivision = TIM_CLOCKDIVISION_DIV1;
+//  htim10.Init.AutoReloadPreload = TIM_AUTORELOAD_PRELOAD_DISABLE;
+//  if (HAL_TIM_Base_Init(&htim10) != HAL_OK)
+//  {
+//    Error_Handler();
+//  }
+//  /* USER CODE BEGIN TIM10_Init 2 */
+//
+//  /* USER CODE END TIM10_Init 2 */
+//
+//}
 
 /**
   * @brief USART2 Initialization Function
