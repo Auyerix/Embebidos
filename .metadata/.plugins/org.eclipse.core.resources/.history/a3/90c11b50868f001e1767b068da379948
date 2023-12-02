@@ -1,0 +1,30 @@
+/*
+ * API_scheduler.c
+ *
+ *  Created on: Nov 30, 2023
+ *      Author: osboxes
+ */
+
+#include "API_scheduler.h"
+#include "main.h"
+
+extern TIM_HandleTypeDef htim10;
+typedef bool bool_t;
+
+bool_t schedulerFlag = false;
+
+
+void HAL_TIM_PeriodElapsedCallback(TIM_HandleTypeDef *htim){
+
+	static uint16_t count = 0;
+	HAL_GPIO_TogglePin(LD2_GPIO_Port, LD2_Pin);
+	if(count==2){
+		HAL_GPIO_TogglePin(LD4_GPIO_Port, LD4_Pin);
+		schedulerFlag = true;
+		count = 0;
+	}
+	count++;
+
+}
+
+

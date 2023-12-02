@@ -20,3 +20,9 @@ Altitude
 AC3
 AC4
 screenState
+pressure[0]
+temperature[0]
+pressure
+temperature
+diplayTemperature
+diplayPressure

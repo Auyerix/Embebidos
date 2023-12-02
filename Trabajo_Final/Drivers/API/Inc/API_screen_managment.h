@@ -20,6 +20,7 @@ typedef enum{
 	SCREEN_HISTORICAL,
 } screenState_t;
 
+
 /**
   * @brief  The assert_param macro is used for function's parameters check.
   * @param  expr If expr is false, it calls assert_failed function
@@ -39,6 +40,11 @@ void screenFSM_init(void);
   * @retval None
   */
 void screenFSM_update(void);
+
+
+void screen_data_update(void);
+
+void show_data(void);
 
 
 

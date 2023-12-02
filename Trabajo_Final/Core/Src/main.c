@@ -34,6 +34,7 @@
 #include "API_debounce.h"
 #include "API_uart.h"
 #include "API_screen_managment.h"
+#include "API_scheduler.h"
 /*---------------------------------------------------------------------------------------------------*/
 /*Archivo de cabezera donde se incluyen las funciones del sensor BMP180                              */
 /*---------------------------------------------------------------------------------------------------*/
@@ -78,20 +79,21 @@ void SystemClock_Config(void);
 static void MX_GPIO_Init(void);
 //static void MX_USART2_UART_Init(void);
 static void MX_I2C1_Init(void);
-	//AAstatic void MX_TIM10_Init(void);
+static void MX_TIM10_Init(void);
 /* USER CODE BEGIN PFP */
 
-/*
-void HAL_TIM_PeriodElapsedCallback(TIM_HandleTypeDef *htim){
 
-	static uint16_t count = 0;
-	if(count==10){
-		HAL_GPIO_TogglePin(LD2_GPIO_Port, LD2_Pin);
-		count = 0;
-	}
-	count++;
-
-}*/
+//void HAL_TIM_PeriodElapsedCallback(TIM_HandleTypeDef *htim){
+//
+//	static uint16_t count = 0;
+//	HAL_GPIO_TogglePin(LD2_GPIO_Port, LD2_Pin);
+//	if(count==2){
+//		HAL_GPIO_TogglePin(LD4_GPIO_Port, LD4_Pin);
+//		count = 0;
+//	}
+//	count++;
+//
+//}
 
 /* USER CODE END PFP */
 
@@ -101,6 +103,8 @@ void HAL_TIM_PeriodElapsedCallback(TIM_HandleTypeDef *htim){
 float Temperature = 0;
 float Pressure = 0;
 float Altitude = 0;
+//float diplayTemperature[4] = {0};
+//float diplayPressure[4] = {0};
 
 uint16_t chip_ID;
 
@@ -136,7 +140,7 @@ int main(void)
   MX_GPIO_Init();
   //MX_USART2_UART_Init();
   MX_I2C1_Init();
-  	  //AAMX_TIM10_Init();
+  MX_TIM10_Init();
   /* USER CODE BEGIN 2 */
 
   HAL_Delay (1000);
@@ -151,9 +155,9 @@ int main(void)
   void screenFSM_init(void);
 
   //Inicialización de uart2 implementada en API_uart.c Si hay error manda a Error_Handler()
-/*   if(!uartInit()){
+   if(!uartInit()){
  	  Error_Handler();
-   }*/
+   }
 
    //Inicio LCD
    lcd_init();
@@ -188,7 +192,7 @@ int main(void)
 
   //Agrego esta función para arrancar el timer 10 y generar una interrupción a su final
    //OJO QUE LA FUNCION ESTA ARMADA MAS ARRIBA, LUEGO CORREGIR
-  //HAL_TIM_Base_Start_IT(&htim10);
+  HAL_TIM_Base_Start_IT(&htim10);
 
   /* USER CODE END 2 */
 
@@ -212,6 +216,16 @@ int main(void)
 
 	  screenFSM_update();
 
+	  //Consulta permanente a la variable de la interrupción para lectura del sensor
+	  readSensor();
+
+	  //readDataTemperature(diplayTemperature);
+
+	  //readDataPressure(diplayPressure);
+
+	  //update del estado del LCD
+	  screen_data_update();
+
 
 /*	  if(readKey()){
 		  HAL_GPIO_TogglePin(LD2_GPIO_Port, LD2_Pin);
@@ -219,7 +233,7 @@ int main(void)
 
 	  }*/
 
-	  /* USER CODE END WHILE */
+    /* USER CODE END WHILE */
 
     /* USER CODE BEGIN 3 */
   }
@@ -288,7 +302,7 @@ static void MX_I2C1_Init(void)
 
   /* USER CODE END I2C1_Init 1 */
   hi2c1.Instance = I2C1;
-  hi2c1.Init.ClockSpeed = 400000;
+  hi2c1.Init.ClockSpeed = 100000;
   hi2c1.Init.DutyCycle = I2C_DUTYCYCLE_2;
   hi2c1.Init.OwnAddress1 = 0;
   hi2c1.Init.AddressingMode = I2C_ADDRESSINGMODE_7BIT;
@@ -311,31 +325,31 @@ static void MX_I2C1_Init(void)
   * @param None
   * @retval None
   */
-//static void MX_TIM10_Init(void)
-//{
+static void MX_TIM10_Init(void)
+{
+
+  /* USER CODE BEGIN TIM10_Init 0 */
 //
-//  /* USER CODE BEGIN TIM10_Init 0 */
+  /* USER CODE END TIM10_Init 0 */
+
+  /* USER CODE BEGIN TIM10_Init 1 */
 //
-//  /* USER CODE END TIM10_Init 0 */
+  /* USER CODE END TIM10_Init 1 */
+  htim10.Instance = TIM10;
+  htim10.Init.Prescaler = 9999;
+  htim10.Init.CounterMode = TIM_COUNTERMODE_UP;
+  htim10.Init.Period = 8399;
+  htim10.Init.ClockDivision = TIM_CLOCKDIVISION_DIV1;
+  htim10.Init.AutoReloadPreload = TIM_AUTORELOAD_PRELOAD_DISABLE;
+  if (HAL_TIM_Base_Init(&htim10) != HAL_OK)
+  {
+    Error_Handler();
+  }
+  /* USER CODE BEGIN TIM10_Init 2 */
 //
-//  /* USER CODE BEGIN TIM10_Init 1 */
-//
-//  /* USER CODE END TIM10_Init 1 */
-//  htim10.Instance = TIM10;
-//  htim10.Init.Prescaler = 9999;
-//  htim10.Init.CounterMode = TIM_COUNTERMODE_UP;
-//  htim10.Init.Period = 8399;
-//  htim10.Init.ClockDivision = TIM_CLOCKDIVISION_DIV1;
-//  htim10.Init.AutoReloadPreload = TIM_AUTORELOAD_PRELOAD_DISABLE;
-//  if (HAL_TIM_Base_Init(&htim10) != HAL_OK)
-//  {
-//    Error_Handler();
-//  }
-//  /* USER CODE BEGIN TIM10_Init 2 */
-//
-//  /* USER CODE END TIM10_Init 2 */
-//
-//}
+  /* USER CODE END TIM10_Init 2 */
+
+}
 
 /**
   * @brief USART2 Initialization Function
@@ -344,14 +358,14 @@ static void MX_I2C1_Init(void)
   */
 //static void MX_USART2_UART_Init(void)
 //{
-
-  /* USER CODE BEGIN USART2_Init 0 */
-
-  /* USER CODE END USART2_Init 0 */
-
-  /* USER CODE BEGIN USART2_Init 1 */
-
-  /* USER CODE END USART2_Init 1 */
+//
+//  /* USER CODE BEGIN USART2_Init 0 */
+//
+//  /* USER CODE END USART2_Init 0 */
+//
+//  /* USER CODE BEGIN USART2_Init 1 */
+//
+//  /* USER CODE END USART2_Init 1 */
 //  huart2.Instance = USART2;
 //  huart2.Init.BaudRate = 115200;
 //  huart2.Init.WordLength = UART_WORDLENGTH_8B;
@@ -359,15 +373,15 @@ static void MX_I2C1_Init(void)
 //  huart2.Init.Parity = UART_PARITY_NONE;
 //  huart2.Init.Mode = UART_MODE_TX_RX;
 //  huart2.Init.HwFlowCtl = UART_HWCONTROL_NONE;
-// huart2.Init.OverSampling = UART_OVERSAMPLING_16;
+//  huart2.Init.OverSampling = UART_OVERSAMPLING_16;
 //  if (HAL_UART_Init(&huart2) != HAL_OK)
 //  {
 //    Error_Handler();
 //  }
-  /* USER CODE BEGIN USART2_Init 2 */
-
-  /* USER CODE END USART2_Init 2 */
-
+//  /* USER CODE BEGIN USART2_Init 2 */
+//
+//  /* USER CODE END USART2_Init 2 */
+//
 //}
 
 /**
@@ -388,7 +402,7 @@ static void MX_GPIO_Init(void)
   __HAL_RCC_GPIOB_CLK_ENABLE();
 
   /*Configure GPIO pin Output Level */
-  HAL_GPIO_WritePin(GPIOA, LD2_Pin|GPIO_PIN_6|GPIO_PIN_7, GPIO_PIN_RESET);
+  HAL_GPIO_WritePin(GPIOA, LD2_Pin|LD3_Pin|LD4_Pin, GPIO_PIN_RESET);
 
   /*Configure GPIO pin : B1_Pin */
   GPIO_InitStruct.Pin = B1_Pin;
@@ -396,8 +410,8 @@ static void MX_GPIO_Init(void)
   GPIO_InitStruct.Pull = GPIO_NOPULL;
   HAL_GPIO_Init(B1_GPIO_Port, &GPIO_InitStruct);
 
-  /*Configure GPIO pins : LD2_Pin PA6 PA7 */
-  GPIO_InitStruct.Pin = LD2_Pin|GPIO_PIN_6|GPIO_PIN_7;
+  /*Configure GPIO pins : LD2_Pin LD3_Pin LD4_Pin */
+  GPIO_InitStruct.Pin = LD2_Pin|LD3_Pin|LD4_Pin;
   GPIO_InitStruct.Mode = GPIO_MODE_OUTPUT_PP;
   GPIO_InitStruct.Pull = GPIO_NOPULL;
   GPIO_InitStruct.Speed = GPIO_SPEED_FREQ_LOW;
