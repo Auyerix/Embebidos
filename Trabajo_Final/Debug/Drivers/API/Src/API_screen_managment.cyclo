@@ -1,3 +1,3 @@
-../Drivers/API/Src/API_screen_managment.c:31:6:screenFSM_init	1
-../Drivers/API/Src/API_screen_managment.c:38:6:screenFSM_update	8
-../Drivers/API/Src/API_screen_managment.c:76:6:screen_data_update	2
+../Drivers/API/Src/API_screen_managment.c:33:6:screenFSM_init	1
+../Drivers/API/Src/API_screen_managment.c:40:6:screenFSM_update	8
+../Drivers/API/Src/API_screen_managment.c:81:6:screen_data_update	6

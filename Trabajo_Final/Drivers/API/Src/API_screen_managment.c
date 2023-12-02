@@ -27,6 +27,8 @@ float diplayPressure[4] = {0};
 //Buffer de escritura en LCD
 char buffer[40];
 
+float alarmTemperature = 25.00;
+
 
 void screenFSM_init(void){
 
@@ -43,6 +45,7 @@ void screenFSM_update(void){
 		case SCREEN_MAIN:
 			if(readKey()){
 				screenState = SCREEN_ALARMS;
+				lcd_clear();
 			}
 
 		break;
@@ -50,6 +53,7 @@ void screenFSM_update(void){
 		case SCREEN_ALARMS:
 			if(readKey()){
 				screenState = SCREEN_HISTORICAL;
+				lcd_clear();
 			}
 
 
@@ -58,6 +62,7 @@ void screenFSM_update(void){
 		case SCREEN_HISTORICAL:
 			if(readKey()){
 				screenState = SCREEN_MAIN;
+				lcd_clear();
 			}
 
 
@@ -81,19 +86,58 @@ void screen_data_update(void){
 		readDataPressure(diplayPressure);
 
 
-			lcd_send_cmd (0x80|0x00);
-			lcd_send_string("VALORES ACTUALES");
+		lcd_send_cmd (0x80|0x00);
+		lcd_send_string("VALORES ACTUALES");
 
-			sprintf (buffer,"Valor=%4.2f C", diplayTemperature[0]);
-			lcd_send_cmd (0x80|0x40);
-			lcd_send_string(buffer);
+		sprintf (buffer,"TEMP=%4.2f C", diplayTemperature[0]);
+		lcd_send_cmd (0x80|0x40);
+		lcd_send_string(buffer);
 
-			sprintf (buffer,"Valor=%6.0f Pa", diplayPressure[0]);
-			lcd_send_cmd (0x80|0x10);
-			lcd_send_string(buffer);
+		sprintf (buffer,"PRESION=%6.0fPa", diplayPressure[0]);
+		lcd_send_cmd (0x80|0x10);
+		lcd_send_string(buffer);
 
+		if(diplayTemperature[0] <= alarmTemperature){
 			lcd_send_cmd (0x80|0x50);
-			lcd_send_string("ALARMAS NO");
+			lcd_send_string("ALARMAS NO      ");
+		}
+		if(diplayTemperature[0] > alarmTemperature){
+			lcd_send_cmd (0x80|0x50);
+			lcd_send_string("ALARMAS TEMP!!! ");
+		}
+	}
+
+	if(screenState == SCREEN_HISTORICAL){
+
+		readDataTemperature(diplayTemperature);
+		readDataPressure(diplayPressure);
+
+
+		lcd_send_cmd (0x80|0x00);
+		lcd_send_string("HISTORIAL");
+
+		sprintf (buffer,"%4.2fC %6.0fPa", diplayTemperature[0], diplayPressure[0]);
+		lcd_send_cmd (0x80|0x40);
+		lcd_send_string(buffer);
+
+		sprintf (buffer,"%4.2fC %6.0fPa", diplayTemperature[1], diplayPressure[1]);
+		lcd_send_cmd (0x80|0x10);
+		lcd_send_string(buffer);
+
+		sprintf (buffer,"%4.2fC %6.0fPa", diplayTemperature[2], diplayPressure[2]);
+		lcd_send_cmd (0x80|0x50);
+		lcd_send_string(buffer);
+	}
+
+	if(screenState == SCREEN_ALARMS){
+
+		lcd_send_cmd (0x80|0x00);
+		lcd_send_string("VALORES ALARMA");
+
+		sprintf (buffer,"%4.2fC", alarmTemperature );
+		lcd_send_cmd (0x80|0x40);
+		lcd_send_string(buffer);
+
 	}
 
 }
