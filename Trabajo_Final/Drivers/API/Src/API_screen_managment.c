@@ -21,13 +21,14 @@
 static screenState_t screenState;
 
 //Matrices para recibir los valores a publicar de temperatura y presión
-float diplayTemperature[4] = {0};
-float diplayPressure[4] = {0};
+static float diplayTemperature[4] = {0};
+static float diplayPressure[4] = {0};
 
 //Buffer de escritura en LCD
-char buffer[40];
+static char buffer[40];
 
-float alarmTemperature = 25.00;
+//float alarmTemperature = 25.00;
+extern float alarmTemperature;
 
 
 void screenFSM_init(void){
@@ -37,6 +38,7 @@ void screenFSM_init(void){
 
 }
 
+//Actualiza los estados según pusador
 void screenFSM_update(void){
 
 
@@ -78,6 +80,8 @@ void screenFSM_update(void){
 
 }
 
+//Actualiza los datos en los vectores encaptulando los vectores de lectura del
+//dispositivo
 void screen_data_update(void){
 
 	if(screenState == SCREEN_MAIN){
@@ -142,11 +146,7 @@ void screen_data_update(void){
 
 }
 
-/*
-sprintf (buf,"Valor= %u", num);
-  //sprintf(buf,"hola    ");
-  lcd_send_cmd (0x80|0x00);
-  lcd_send_string (buf);*/
+
 
 
 

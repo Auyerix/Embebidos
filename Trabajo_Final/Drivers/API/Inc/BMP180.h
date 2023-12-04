@@ -22,13 +22,15 @@
 
 #include "stm32f4xx_hal.h"
 
+typedef float float_t;
+
 void BMP180_Start (void);
 
-float BMP180_GetTemp (void);
+float_t BMP180_GetTemp (void);
 
-float BMP180_GetPress (int oss);
+float_t BMP180_GetPress (int oss);
 
-float BMP180_GetAlt (int oss);
+float_t BMP180_GetAlt (int oss);
 
 uint16_t Get_ID (void);
 

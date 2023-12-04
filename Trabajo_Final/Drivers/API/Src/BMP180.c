@@ -4,6 +4,7 @@
   BMP180 LIBRARY for STM32 using I2C
   Author:   ControllersTech
   Updated:  26/07/2020
+  Updated:
 
   ******************************************************************************
   Copyright (C) 2017 ControllersTech.com
@@ -17,13 +18,16 @@
 */
 
 
-
 #include "stm32f4xx_hal.h"
 #include "math.h"
+
+#include "API_delay.h"
+
 
 extern I2C_HandleTypeDef hi2c1;
 #define BMP180_I2C &hi2c1
 
+//dirección I2C del sensor de presión y temperatura BMP180
 #define BMP180_ADDRESS 0xEE
 
 
@@ -93,7 +97,7 @@ uint16_t Get_UTemp (void)
 	return ((Temp_RAW[0]<<8) + Temp_RAW[1]);
 }
 
-float BMP180_GetTemp (void)
+float_t BMP180_GetTemp (void)
 {
 	UT = Get_UTemp();
 	X1 = ((UT-AC6) * (AC5/(pow(2,15))));
@@ -108,10 +112,14 @@ uint32_t Get_UPress (int oss)   // oversampling setting 0,1,2,3
 {
 	uint8_t datatowrite = 0x34+(oss<<6);
 	uint8_t Press_RAW[3] = {0};
+
 	HAL_I2C_Mem_Write(BMP180_I2C, BMP180_ADDRESS, 0xF4, 1, &datatowrite, 1, 1000);
+
+
 	switch (oss)
 	{
 		case (0):
+
 			HAL_Delay (5);
 			break;
 		case (1):
@@ -123,13 +131,17 @@ uint32_t Get_UPress (int oss)   // oversampling setting 0,1,2,3
 		case (3):
 			HAL_Delay (26);
 			break;
+		default:
+			HAL_Delay (5);
+
 	}
+
 	HAL_I2C_Mem_Read(BMP180_I2C, BMP180_ADDRESS, 0xF6, 1, Press_RAW, 3, 1000);
 	return (((Press_RAW[0]<<16)+(Press_RAW[1]<<8)+Press_RAW[2]) >> (8-oss));
 }
 
 
-float BMP180_GetPress (int oss)
+float_t BMP180_GetPress (int oss)
 {
 	UP = Get_UPress(oss);
 	X1 = ((UT-AC6) * (AC5/(pow(2,15))));
@@ -156,18 +168,19 @@ float BMP180_GetPress (int oss)
 }
 
 
-float BMP180_GetAlt (int oss)
+float_t BMP180_GetAlt (int oss)
 {
 	BMP180_GetPress (oss);
-	return 44330*(1-(pow((Press/(float)atmPress), 0.19029495718)));
+	return 44330*(1-(pow((Press/(float_t)atmPress), 0.19029495718)));
 }
 
 void BMP180_Start (void)
 {
 	read_calibration_data();
+
 }
 
-// Get ID by GA
+// Get ID by GA solo para Debug de I2C
 uint16_t Get_ID (void)
 {
 

@@ -22,28 +22,43 @@ typedef enum{
 
 
 /**
-  * @brief  The assert_param macro is used for function's parameters check.
-  * @param  expr If expr is false, it calls assert_failed function
-  *         which reports the name of the source file and the source
-  *
-  *
+  * @brief  inicia la máquina de estados de la pantalla
+  * Estados:
+  * SCREEN_MAIN
+  * SCREEN_ALARMS
+  * SCREEN_HISTORICAL
+  * @param  None
   * @retval None
   */
 void screenFSM_init(void);
 
 /**
-  * @brief  The assert_param macro is used for function's parameters check.
-  * @param  expr If expr is false, it calls assert_failed function
-  *         which reports the name of the source file and the source
-  *         line number of the call that failed.
-  *         If expr is true, it returns no value.
+  * @brief  Permite el update por medio del pulsador (previo a una función antirebote)
+  * de manera de ir cambiando de estado en la màquina, mostrando las distintas pantallas
+  * @param  None
   * @retval None
   */
 void screenFSM_update(void);
 
-
+/**
+  * @brief  Permite hacer la actualización de los valores de los vectores de presión y temperatura
+  * llamado a funciones: readDataTemperature(diplayTemperature) y readDataPressure(diplayPressure);
+  * enviándoles el puntero displayTemperature y displayPressure para que copie en esos nuevos vectores
+  * los valores obtenidos en el módulo de lectura de valores del sensor sin acceso a los vectores
+  * originales de manera que queden encapsulados
+  * Esta función luego se encargará de poner los datos en un string para ser mostrados en el LCD con
+  * sus correspondientes formatos
+  * @atention habilitar float para printf en el IDE
+  * @param  None
+  * @retval None
+  */
 void screen_data_update(void);
 
+/**
+  * @brief  Función NO implementada
+  * @param  None
+  * @retval None
+  */
 void show_data(void);
 
 

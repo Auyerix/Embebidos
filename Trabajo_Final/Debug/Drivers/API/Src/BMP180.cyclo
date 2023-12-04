@@ -1,8 +1,8 @@
-../Drivers/API/Src/BMP180.c:64:6:read_calibration_data	1
-../Drivers/API/Src/BMP180.c:86:10:Get_UTemp	1
-../Drivers/API/Src/BMP180.c:96:7:BMP180_GetTemp	1
-../Drivers/API/Src/BMP180.c:107:10:Get_UPress	5
-../Drivers/API/Src/BMP180.c:132:7:BMP180_GetPress	3
-../Drivers/API/Src/BMP180.c:159:7:BMP180_GetAlt	1
-../Drivers/API/Src/BMP180.c:165:6:BMP180_Start	1
-../Drivers/API/Src/BMP180.c:171:10:Get_ID	1
+../Drivers/API/Src/BMP180.c:68:6:read_calibration_data	1
+../Drivers/API/Src/BMP180.c:90:10:Get_UTemp	1
+../Drivers/API/Src/BMP180.c:100:9:BMP180_GetTemp	1
+../Drivers/API/Src/BMP180.c:111:10:Get_UPress	5
+../Drivers/API/Src/BMP180.c:144:9:BMP180_GetPress	3
+../Drivers/API/Src/BMP180.c:171:9:BMP180_GetAlt	1
+../Drivers/API/Src/BMP180.c:177:6:BMP180_Start	1
+../Drivers/API/Src/BMP180.c:184:10:Get_ID	1

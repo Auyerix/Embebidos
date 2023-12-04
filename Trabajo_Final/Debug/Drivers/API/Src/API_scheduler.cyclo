@@ -1,4 +1,5 @@
-../Drivers/API/Src/API_scheduler.c:20:6:HAL_TIM_PeriodElapsedCallback	2
-../Drivers/API/Src/API_scheduler.c:33:8:readSensor	2
-../Drivers/API/Src/API_scheduler.c:55:6:readDataTemperature	1
-../Drivers/API/Src/API_scheduler.c:64:6:readDataPressure	1
+../Drivers/API/Src/API_scheduler.c:37:6:HAL_TIM_PeriodElapsedCallback	2
+../Drivers/API/Src/API_scheduler.c:50:8:readSensor	2
+../Drivers/API/Src/API_scheduler.c:77:6:readDataTemperature	1
+../Drivers/API/Src/API_scheduler.c:86:6:readDataPressure	1
+../Drivers/API/Src/API_scheduler.c:95:6:readDataSerial	2

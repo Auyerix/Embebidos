@@ -81,5 +81,9 @@ void uartSendStringSize(uint8_t * pstring, uint16_t size){
 
 }
 
+void uartReceiveStringSize(uint8_t * pstring, uint16_t size){
+
+	HAL_UART_Receive(&huart2, pstring, size, 20000);
+}
 
 

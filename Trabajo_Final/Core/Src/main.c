@@ -15,33 +15,58 @@
   *
   ******************************************************************************
   */
+
+/**
+  ******************************************************************************
+  * @file           : main.c
+  * @brief          : Programa main para lectura de Presión y Temperatura
+  * @Author			: Gusavo Auyero
+  ******************************************************************************
+  * @attention
+  * En properties / c/c++ settings / MCU Settings habilitar use float with
+  * print f para que pueda escribir vectores con número flotantes y poder
+  * mostrarlos por LCD
+  *
+  ******************************************************************************
+  */
+
+
+
+
 /* USER CODE END Header */
 /* Includes ------------------------------------------------------------------*/
 #include "main.h"
 
 /* Private includes ----------------------------------------------------------*/
 /* USER CODE BEGIN Includes */
-//#include <stdio.h>
+
 #include <stdint.h>
 #include <stdbool.h>
 #include <string.h>
 
-/*---------------------------------------------------------------------------------------------------*/
-/*Archivo de cabezera donde se incluyen las funciones de retardo no bloqueante / antirebote / UART   */
-/*---------------------------------------------------------------------------------------------------*/
-
+ /**
+ * @brief  Archivo de cabezera donde se incluyen las funciones de retardo no bloqueante / antirebote / UART
+ * @param  None
+ * @retval : None
+*/
 #include "API_delay.h"
 #include "API_debounce.h"
 #include "API_uart.h"
 #include "API_screen_managment.h"
 #include "API_scheduler.h"
-/*---------------------------------------------------------------------------------------------------*/
-/*Archivo de cabezera donde se incluyen las funciones del sensor BMP180                              */
-/*---------------------------------------------------------------------------------------------------*/
+
+/**
+ * @brief  Archivo de cabezera donde se incluyen las funciones del sensor BMP180
+ * @param  None
+ * @retval : None
+ */
 #include "BMP180.h"
-/*---------------------------------------------------------------------------------------------------*/
-/*Archivo de cabezera donde se incluyen las funciones del LCD                                        */
-/*---------------------------------------------------------------------------------------------------*/
+
+/**
+ * @brief  Archivo de cabezera donde se incluyen las funciones del LCD
+ * @param  None
+ * @retval : None
+ */
 #include "i2c-lcd.h"
 
 
@@ -77,36 +102,22 @@ TIM_HandleTypeDef htim10;
 /* Private function prototypes -----------------------------------------------*/
 void SystemClock_Config(void);
 static void MX_GPIO_Init(void);
+//La UART2 se inicializa en archivo aparte
 //static void MX_USART2_UART_Init(void);
 static void MX_I2C1_Init(void);
 static void MX_TIM10_Init(void);
 /* USER CODE BEGIN PFP */
 
 
-//void HAL_TIM_PeriodElapsedCallback(TIM_HandleTypeDef *htim){
-//
-//	static uint16_t count = 0;
-//	HAL_GPIO_TogglePin(LD2_GPIO_Port, LD2_Pin);
-//	if(count==2){
-//		HAL_GPIO_TogglePin(LD4_GPIO_Port, LD4_Pin);
-//		count = 0;
-//	}
-//	count++;
-//
-//}
-
 /* USER CODE END PFP */
 
 /* Private user code ---------------------------------------------------------*/
 /* USER CODE BEGIN 0 */
 
-float Temperature = 0;
-float Pressure = 0;
-float Altitude = 0;
-//float diplayTemperature[4] = {0};
-//float diplayPressure[4] = {0};
 
 uint16_t chip_ID;
+
+int8_t temporal = 0;
 
 /* USER CODE END 0 */
 
@@ -138,6 +149,7 @@ int main(void)
 
   /* Initialize all configured peripherals */
   MX_GPIO_Init();
+  // La UART2 se inicializa en archivo aparte
   //MX_USART2_UART_Init();
   MX_I2C1_Init();
   MX_TIM10_Init();
@@ -154,44 +166,29 @@ int main(void)
   //Inicialización de fsm de pantalla
   void screenFSM_init(void);
 
-  //Inicialización de uart2 implementada en API_uart.c Si hay error manda a Error_Handler()
+  //Inicialización de uart2 implementada en API_uart.c Si hay error inicia Error_Handler()
    if(!uartInit()){
  	  Error_Handler();
    }
 
-   //Inicio LCD
+   //Inicio Display LCD
    lcd_init();
 
+   //Mensaje de bienveniada, bloqueante del LCD
+   welcome_message();
 
- //  void welcome_message(void);
-
-	//Mensaje de Bienvenida PASAR A LA API
-	//el or se hace según la posición de memoria de inicio
-	//depende de la tabla de memoria que es distinta en 16x4 y 20x4
-	//ver https://controllerstech.com/lcd-20x4-using-i2c-with-stm32/
-
-	lcd_clear();
-
-	lcd_send_cmd (0x80|0x00);
-	lcd_send_string("HOLA1");
-
-	lcd_send_cmd (0x80|0x40);
-	lcd_send_string("HOLA2");
-
-	lcd_send_cmd (0x80|0x10);
-	lcd_send_string("HOLA3 nuevo");
-
-	lcd_send_cmd (0x80|0x50);
-	lcd_send_string("Autor: G. Auyero");
-
-	HAL_Delay(1000);
-
-	welcome_message();
+   //ATENCION: función bloqueante de lectura inicial del valor de Alarma
+   //Implementada pero a ser reemplazada por lectura por interrupciones no bloqueante
+   //readDataSerial();
 
 
-
-  //Agrego esta función para arrancar el timer 10 y generar una interrupción a su final
-   //OJO QUE LA FUNCION ESTA ARMADA MAS ARRIBA, LUEGO CORREGIR
+   /**
+   * @brief  inicio de timer 10 que generara interrupción al final de cuenta y dispara
+   * las lecturas de temperatura y presión junto con la actualización del histórico de
+   * valores leidos.
+   * @param  &htim10 = timer 10 configurado en MX
+   * @retval : None
+  */
   HAL_TIM_Base_Start_IT(&htim10);
 
   /* USER CODE END 2 */
@@ -201,37 +198,18 @@ int main(void)
   while (1)
   {
 
-	  //Temperature = BMP180_GetTemp();
-
-	  //Pressure = BMP180_GetPress (0);
-
-	  //Altitude = BMP180_GetAlt(0);
-
-	  //HAL_Delay (2000);
-
 	  //Llamado a función de actualización de antirebote de pulsador
 	  debounceFSM_update();
 
 	  //Llamado a la función de actualización de screen managment
-
 	  screenFSM_update();
 
 	  //Consulta permanente a la variable de la interrupción para lectura del sensor
 	  readSensor();
 
-	  //readDataTemperature(diplayTemperature);
-
-	  //readDataPressure(diplayPressure);
-
 	  //update del estado del LCD
 	  screen_data_update();
 
-
-/*	  if(readKey()){
-		  HAL_GPIO_TogglePin(LD2_GPIO_Port, LD2_Pin);
-		  uartSendString((uint8_t *)"HOLA MUNDO\n\r");
-
-	  }*/
 
     /* USER CODE END WHILE */
 

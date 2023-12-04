@@ -84,17 +84,18 @@ void welcome_message(void){
 	lcd_clear();
 
 	lcd_send_cmd (0x80|0x00);
-	lcd_send_string("Bienvenida");
+	lcd_send_string("BIENVENIDA:");
 
 	lcd_send_cmd (0x80|0x40);
-	lcd_send_string("linea2");
+	lcd_send_string("LECTOR PRESION");
 
 	lcd_send_cmd (0x80|0x10);
-	lcd_send_string("linea3");
+	lcd_send_string("Y TEMPERATURA");
 
 	lcd_send_cmd (0x80|0x50);
-	lcd_send_string("linea4");
+	lcd_send_string("PdM y PCSE 2023");
 
-	HAL_Delay(2000);
+	HAL_Delay(3000);
+	lcd_clear();
 
 }
