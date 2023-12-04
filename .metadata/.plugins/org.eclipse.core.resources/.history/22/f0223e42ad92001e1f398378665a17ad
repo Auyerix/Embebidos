@@ -1,0 +1,28 @@
+/*
+ * API_scheduler.h
+ *
+ *  Created on: Nov 30, 2023
+ *      Author: osboxes
+ */
+
+#ifndef API_INC_API_SCHEDULER_H_
+#define API_INC_API_SCHEDULER_H_
+
+#include "stm32f4xx_hal.h"
+#include <stdbool.h>
+
+typedef bool bool_t;
+typedef float float_t;
+
+void HAL_TIM_PeriodElapsedCallback(TIM_HandleTypeDef *htim);
+
+bool_t readSensor(void);
+
+void readDataTemperature(float* diplayTemperature);
+
+void readDataPressure(float* diplayPressure);
+
+void readDataSerial(void);
+
+
+#endif /* API_INC_API_SCHEDULER_H_ */

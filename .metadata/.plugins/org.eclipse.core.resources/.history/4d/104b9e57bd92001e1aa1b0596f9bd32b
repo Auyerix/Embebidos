@@ -1,0 +1,62 @@
+/*
+ * API_screen_managment.h
+ *
+ *  Created on: Nov 27, 2023
+ *      Author: osboxes
+ */
+
+#ifndef API_INC_API_SCREEN_MANAGMENT_H_
+#define API_INC_API_SCREEN_MANAGMENT_H_
+
+
+
+/*---------------------------------------------------------------------------------------------------*/
+/*Enumera los distintos estados de la máquina de elementos finito, dependiendo del estado toma       */
+/*acciones                                                                                           */
+/*---------------------------------------------------------------------------------------------------*/
+typedef enum{
+	SCREEN_MAIN,
+	SCREEN_ALARMS,
+	SCREEN_HISTORICAL,
+} screenState_t;
+
+
+/**
+  * @brief  inicia la máquina de estados de la pantalla
+  * Estados:
+  * SCREEN_MAIN
+  * SCREEN_ALARMS
+  * SCREEN_HISTORICAL
+  * @param  None
+  * @retval None
+  */
+void screenFSM_init(void);
+
+/**
+  * @brief  Permite el update por medio del pulsador (previo a una función antirebote)
+  * de manera de ir cambiando de estado en la màquina, mostrando las distintas pantallas
+  * @param  None
+  * @retval None
+  */
+void screenFSM_update(void);
+
+/**
+  * @brief  Permite el update por medio del pulsador (previo a una función antirebote)
+  * de manera de ir cambiando de estado en la màquina, mostrando las distintas pantallas
+  * @param  None
+  * @retval None
+  */
+void screen_data_update(void);
+
+void show_data(void);
+
+
+
+
+
+
+
+
+
+
+#endif /* API_INC_API_SCREEN_MANAGMENT_H_ */

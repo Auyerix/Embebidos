@@ -1,0 +1,59 @@
+/*
+ * API_screen_managment.h
+ *
+ *  Created on: Nov 27, 2023
+ *      Author: osboxes
+ */
+
+#ifndef API_INC_API_SCREEN_MANAGMENT_H_
+#define API_INC_API_SCREEN_MANAGMENT_H_
+
+
+
+/*---------------------------------------------------------------------------------------------------*/
+/*Enumera los distintos estados de la máquina de elementos finito, dependiendo del estado toma       */
+/*acciones                                                                                           */
+/*---------------------------------------------------------------------------------------------------*/
+typedef enum{
+	SCREEN_MAIN,
+	SCREEN_ALARMS,
+	SCREEN_HISTORICAL,
+} screenState_t;
+
+
+/**
+  * @brief  inicia la máquina de estados de la pantalla
+  * Estados:
+  * SCREEN_MAIN
+  * SCREEN_ALARMS
+  * SCREEN_HISTORICAL
+  * @param  None
+  * @retval None
+  */
+void screenFSM_init(void);
+
+/**
+  * @brief  The assert_param macro is used for function's parameters check.
+  * @param  expr If expr is false, it calls assert_failed function
+  *         which reports the name of the source file and the source
+  *         line number of the call that failed.
+  *         If expr is true, it returns no value.
+  * @retval None
+  */
+void screenFSM_update(void);
+
+
+void screen_data_update(void);
+
+void show_data(void);
+
+
+
+
+
+
+
+
+
+
+#endif /* API_INC_API_SCREEN_MANAGMENT_H_ */

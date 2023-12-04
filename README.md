@@ -14,4 +14,7 @@ Autor: Gustavo Auyero
 29/11/23	Segundo Draft para Trabajo Final (Trabajo_Final) 
 01/12/23	Primera Revisión Trabajo Final (Trabajo_Final) 
 01/12/23	Segunda Revisión Trabajo Final funcionamiento básico (Trabajo_Final) 
+04/12/23	Tercera Revisión Trabajo Final funcionamiento completo (Trabajo Final)
+		quedan pendientes la actualización de alarma por UART y timers no bloqueantes
+		en la lectura de la presión no compensada
 
