@@ -4,7 +4,10 @@
   BMP180 LIBRARY for STM32 using I2C
   Author:   ControllersTech
   Updated:  26/07/2020
-  Updated:
+  Updated:  20/11/2023 by Gustavo Auyero
+  	  	  	Se incluye typedef float float_t; para hacer portable el código
+  	  	  	Se incluye una función uint16_t Get_ID (void) para encontrar el dispositivo en debug
+  	  	  	Se comentan las funciones dando una explicación de su uso
 
   ******************************************************************************
   Copyright (C) 2017 ControllersTech.com

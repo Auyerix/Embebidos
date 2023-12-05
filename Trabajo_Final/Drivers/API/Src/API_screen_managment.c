@@ -21,16 +21,16 @@
 static screenState_t screenState;
 
 //Matrices para recibir los valores a publicar de temperatura y presión
-static float diplayTemperature[4] = {0};
-static float diplayPressure[4] = {0};
+static float_t diplayTemperature[4] = {0};
+static float_t diplayPressure[4] = {0};
 
 //Buffer de escritura en LCD
 static char buffer[40];
 
 //float alarmTemperature = 25.00;
-extern float alarmTemperature;
+extern float_t alarmTemperature;
 
-
+//Inicio de máquina de estado de pantalla
 void screenFSM_init(void){
 
 	//inicio de la máquina de estados

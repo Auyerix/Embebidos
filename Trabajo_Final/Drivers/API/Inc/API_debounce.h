@@ -2,7 +2,7 @@
 #include <stdint.h>
 #include <stdbool.h>
 
-//defino este tipo para debolver los valores true y false
+//defino este tipo para devolver los valores true y false
 typedef bool bool_t;
 
 /*---------------------------------------------------------------------------------------------------*/

@@ -58,7 +58,7 @@ void uartSendString(uint8_t * pstring){
 	uint8_t i = 0;
 
 	//Cuenta de caracteres en la cadena apuntada por pstring
-	//importante armar rutina de while no bloqueante con el if y break (implementado)
+	//Rutina de while no bloqueante con el if y break
 	while (* pstring++ !='\0'){
 		i++;
 		if(i>10000) break;
@@ -69,9 +69,6 @@ void uartSendString(uint8_t * pstring){
 
 	HAL_UART_Transmit(&huart2, pstring - i - 1 , i , 200);
 
-	//HAL_UART_Transmit(&huart2, (const uint8_t*) "Hola\n", sizeof("Hola\n"), 1000);
-	//HAL_UART_Transmit(&huart2, pstring, sizeof (pstring), 200);
-	//HAL_UART_Transmit(&huart2, pstring, 10, 200);
 
 }
 

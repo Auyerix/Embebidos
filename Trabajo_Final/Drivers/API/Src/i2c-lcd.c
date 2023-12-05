@@ -1,6 +1,4 @@
 
-/** Put this in the src folder **/
-
 #include "i2c-lcd.h"
 extern I2C_HandleTypeDef hi2c1;  // change your handler here accordingly
 
@@ -56,7 +54,7 @@ void lcd_init (void)
 
   // dislay initialisation
 	//Comment the line “lcd_send_cmd (0x28);” and it ‘ll work for 1604a LCD
-	//es el display que estoy probando y así funciona ok
+	//
 	//lcd_send_cmd (0x28); // Function set --> DL=0 (4 bit mode), N = 1 (2 line display) F = 0 (5x8 characters)
 	HAL_Delay(1);
 	lcd_send_cmd (0x08); //Display on/off control --> D=0,C=0, B=0  ---> display off

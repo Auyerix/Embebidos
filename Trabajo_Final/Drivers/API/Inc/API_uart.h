@@ -32,6 +32,7 @@ void uartSendStringSize(uint8_t * pstring, uint16_t size);
 
 /**
   * @brief  Función de recepción de una cadena por el puerto serie
+  * @atention: función bloqueante!!
   * @param  Puntero a la cadena donde se reciben los caracteres por puerto serie
   * @param  Cantidad de caracteres de esa cadena a recibir
   * @retval HAL void

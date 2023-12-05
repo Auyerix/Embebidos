@@ -164,7 +164,7 @@ int main(void)
   debounceFSM_init();
 
   //Inicialización de fsm de pantalla
-  void screenFSM_init(void);
+  screenFSM_init();
 
   //Inicialización de uart2 implementada en API_uart.c Si hay error inicia Error_Handler()
    if(!uartInit()){

@@ -20,6 +20,8 @@ typedef enum{
 	SCREEN_HISTORICAL,
 } screenState_t;
 
+typedef float float_t;
+
 
 /**
   * @brief  inicia la máquina de estados de la pantalla
@@ -60,13 +62,6 @@ void screen_data_update(void);
   * @retval None
   */
 void show_data(void);
-
-
-
-
-
-
-
 
 
 

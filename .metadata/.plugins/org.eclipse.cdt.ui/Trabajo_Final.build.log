@@ -1,10 +1,10 @@
-16:08:48 **** Incremental Build of configuration Debug for project Trabajo_Final ****
+17:47:25 **** Incremental Build of configuration Debug for project Trabajo_Final ****
 make -j1 all 
 arm-none-eabi-size   Trabajo_Final.elf 
    text	   data	    bss	    dec	    hex	filename
-  34832	    480	   2384	  37696	   9340	Trabajo_Final.elf
+  34856	    480	   2384	  37720	   9358	Trabajo_Final.elf
 Finished building: default.size.stdout
  
 
-16:08:49 Build Finished. 0 errors, 0 warnings. (took 949ms)
+17:47:26 Build Finished. 0 errors, 0 warnings. (took 943ms)
 
