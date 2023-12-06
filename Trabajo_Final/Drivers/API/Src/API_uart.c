@@ -41,7 +41,7 @@ bool_t uartInit(void){
 		//HAL_UART_Transmit(&huart2, (const uint8_t *)parametros , sizeof(parametros), 100);
 		HAL_UART_Transmit(&huart2, (const uint8_t *)parametros , strlen(parametros), 100);
 
-		//Demora bloqueante para observar los valores de la uart
+		//Demora bloqueante para observar los valores iniciales de la uart
 		HAL_Delay(2000);
 
 
@@ -61,7 +61,7 @@ void uartSendString(uint8_t * pstring){
 	//Rutina de while no bloqueante con el if y break
 	while (* pstring++ !='\0'){
 		i++;
-		if(i>10000) break;
+		if(i>254) break;
 	}
 	//Llama a la HAL con la huart correspoendiente, el valor del puntero retornado al valor inicial
 	//luego de la cuenta de caracteres (se le resta i y 1 para llegar al origen) y el largo leido en la

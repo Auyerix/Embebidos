@@ -74,21 +74,21 @@ bool_t readSensor(void){
 	return false;
 }
 
-void readDataTemperature(float_t* diplayTemperature){
+void readDataTemperature(float_t* displayTemperature){
 
-	*diplayTemperature = temperature[0];
-	*(diplayTemperature+1) = temperature[1];
-	*(diplayTemperature+2) = temperature[2];
-	*(diplayTemperature+3) = temperature[3];
+	*displayTemperature = temperature[0];
+	*(displayTemperature+1) = temperature[1];
+	*(displayTemperature+2) = temperature[2];
+	*(displayTemperature+3) = temperature[3];
 
 }
 
-void readDataPressure(float_t* diplayPressure){
+void readDataPressure(float_t* displayPressure){
 
-	*diplayPressure = pressure[0];
-	*(diplayPressure+1) = pressure[1];
-	*(diplayPressure+2) = pressure[2];
-	*(diplayPressure+3) = pressure[3];
+	*displayPressure = pressure[0];
+	*(displayPressure+1) = pressure[1];
+	*(displayPressure+2) = pressure[2];
+	*(displayPressure+3) = pressure[3];
 
 }
 

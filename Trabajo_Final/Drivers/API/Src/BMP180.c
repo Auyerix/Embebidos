@@ -34,7 +34,7 @@ extern I2C_HandleTypeDef hi2c1;
 #define BMP180_ADDRESS 0xEE
 
 
-// Defines according to the datsheet
+// Defines according to the datasheet
 int16_t AC1 = 0;
 int16_t AC2 = 0;
 int16_t AC3 = 0;

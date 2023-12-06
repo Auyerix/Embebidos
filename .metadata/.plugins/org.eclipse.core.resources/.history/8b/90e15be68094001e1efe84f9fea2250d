@@ -1,0 +1,154 @@
+/*
+ * API_screen_managment.c
+ *
+ *  Created on: Nov 27, 2023
+ *      Author: osboxes
+ */
+
+#include "API_screen_managment.h"
+#include "stm32f4xx_hal.h"
+#include "main.h"
+#include "API_debounce.h"
+#include "API_scheduler.h"
+
+#include "i2c-lcd.h"
+
+#include <stdio.h>
+#include "string.h"
+
+
+//definición de una instancia de screenState_t con los distintos estados de la máquina
+static screenState_t screenState;
+
+//Matrices para recibir los valores a publicar de temperatura y presión
+static float_t displayTemperature[4] = {0};
+static float_t displayPressure[4] = {0};
+
+//Buffer de escritura en LCD
+static char buffer[40];
+
+//float alarmTemperature = 25.00;
+extern float_t alarmTemperature;
+
+//Inicio de máquina de estado de pantalla
+void screenFSM_init(void){
+
+	//inicio de la máquina de estados
+	screenState = SCREEN_MAIN;
+
+}
+
+//Actualiza los estados según pusador
+void screenFSM_update(void){
+
+
+		switch(screenState){
+
+		case SCREEN_MAIN:
+			if(readKey()){
+				screenState = SCREEN_ALARMS;
+				lcd_clear();
+			}
+
+		break;
+
+		case SCREEN_ALARMS:
+			if(readKey()){
+				screenState = SCREEN_HISTORICAL;
+				lcd_clear();
+			}
+
+
+		break;
+
+		case SCREEN_HISTORICAL:
+			if(readKey()){
+				screenState = SCREEN_MAIN;
+				lcd_clear();
+			}
+
+
+		break;
+
+
+
+		default:
+		screenState = SCREEN_MAIN;
+
+		}
+
+
+}
+
+//Actualiza los datos en los vectores encaptulando los vectores de lectura del
+//dispositivo
+void screen_data_update(void){
+
+	if(screenState == SCREEN_MAIN){
+
+		readDataTemperature(displayTemperature);
+		readDataPressure(displayPressure);
+
+
+		lcd_send_cmd (0x80|0x00);
+		lcd_send_string("VALORES ACTUALES");
+
+		sprintf (buffer,"TEMP=%4.2f C", displayTemperature[0]);
+		lcd_send_cmd (0x80|0x40);
+		lcd_send_string(buffer);
+
+		sprintf (buffer,"PRESION=%6.0fPa", displayPressure[0]);
+		lcd_send_cmd (0x80|0x10);
+		lcd_send_string(buffer);
+
+		if(diplayTemperature[0] <= alarmTemperature){
+			lcd_send_cmd (0x80|0x50);
+			lcd_send_string("ALARMAS NO      ");
+		}
+		if(diplayTemperature[0] > alarmTemperature){
+			lcd_send_cmd (0x80|0x50);
+			lcd_send_string("ALARMAS TEMP!!! ");
+		}
+	}
+
+	if(screenState == SCREEN_HISTORICAL){
+
+		readDataTemperature(displayTemperature);
+		readDataPressure(displayPressure);
+
+
+		lcd_send_cmd (0x80|0x00);
+		lcd_send_string("HISTORIAL");
+
+		sprintf (buffer,"%4.2fC %6.0fPa", displayTemperature[0], displayPressure[0]);
+		lcd_send_cmd (0x80|0x40);
+		lcd_send_string(buffer);
+
+		sprintf (buffer,"%4.2fC %6.0fPa", displayTemperature[1], displayPressure[1]);
+		lcd_send_cmd (0x80|0x10);
+		lcd_send_string(buffer);
+
+		sprintf (buffer,"%4.2fC %6.0fPa", displayTemperature[2], displayPressure[2]);
+		lcd_send_cmd (0x80|0x50);
+		lcd_send_string(buffer);
+	}
+
+	if(screenState == SCREEN_ALARMS){
+
+		lcd_send_cmd (0x80|0x00);
+		lcd_send_string("VALORES ALARMA");
+
+		sprintf (buffer,"%4.2fC", alarmTemperature );
+		lcd_send_cmd (0x80|0x40);
+		lcd_send_string(buffer);
+
+	}
+
+}
+
+
+
+
+
+
+
