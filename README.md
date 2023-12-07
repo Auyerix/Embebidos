@@ -18,4 +18,5 @@ Autor: Gustavo Auyero
 		quedan pendientes la actualización de alarma por UART y timers no bloqueantes
 		en la lectura de la presión no compensada
 05/12/23	Revisión Final Versión 0.10
+06/12/23	Revisión Final Versión 0.20
 
