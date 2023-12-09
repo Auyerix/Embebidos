@@ -1,0 +1,68 @@
+/*
+ * API_screen_managment.h
+ *
+ *  Created on: Nov 27, 2023
+ *      Author: osboxes
+ */
+
+#ifndef API_INC_API_SCREEN_MANAGMENT_H_
+#define API_INC_API_SCREEN_MANAGMENT_H_
+
+
+
+/*---------------------------------------------------------------------------------------------------*/
+/*Enumera los distintos estados de la máquina de elementos finito, dependiendo del estado toma       */
+/*acciones                                                                                           */
+/*---------------------------------------------------------------------------------------------------*/
+typedef enum{
+	SCREEN_MAIN,
+	SCREEN_ALARMS,
+	SCREEN_HISTORICAL,
+} screenState_t;
+
+typedef float float_t;
+
+
+/**
+  * @brief  inicia la máquina de estados de la pantalla
+  * Estados:
+  * SCREEN_MAIN
+  * SCREEN_ALARMS
+  * SCREEN_HISTORICAL
+  * @param  None
+  * @retval None
+  */
+void screenFSM_init(void);
+
+/**
+  * @brief  Permite el update por medio del pulsador (previo a una función antirebote)
+  * de manera de ir cambiando de estado en la màquina, mostrando las distintas pantallas
+  * @param  None
+  * @retval None
+  */
+void screenFSM_update(void);
+
+/**
+  * @brief  Permite hacer la actualización de los valores de los vectores de presión y temperatura
+  * llamado a funciones: readDataTemperature(diplayTemperature) y readDataPressure(diplayPressure);
+  * enviándoles el puntero displayTemperature y displayPressure para que copie en esos nuevos vectores
+  * los valores obtenidos en el módulo de lectura de valores del sensor sin acceso a los vectores
+  * originales de manera que queden encapsulados
+  * Esta función luego se encargará de poner los datos en un string para ser mostrados en el LCD con
+  * sus correspondientes formatos
+  * @atention habilitar float para printf en el IDE
+  * @param  None
+  * @retval None
+  */
+void screen_data_update(void);
+
+/**
+  * @brief  Función NO implementada
+  * @param  None
+  * @retval None
+  */
+void show_data(void);
+
+
+
+#endif /* API_INC_API_SCREEN_MANAGMENT_H_ */

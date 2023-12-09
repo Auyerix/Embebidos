@@ -1,0 +1,15 @@
+/*
+ * port.c
+ *
+ *  Created on: Dec 8, 2023
+ *      Author: osboxes
+ */
+
+
+
+void i2c_lcd_transmit (uint8_t * dataTransmit_t, uint8_t size){
+
+
+
+
+}

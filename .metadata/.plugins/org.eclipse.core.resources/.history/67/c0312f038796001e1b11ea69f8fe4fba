@@ -1,0 +1,16 @@
+/*
+ * port.h
+ *
+ *  Created on: Dec 8, 2023
+ *      Author: Gustavo Auyero
+ */
+
+//#ifndef API_INC_PORT_H_
+//#define API_INC_PORT_H_
+
+#include "main.h"
+//#include "stm32f4xx_hal.h"
+//#include <stdint.h>
+
+
+void i2c_lcd_transmit (uint8_t * dataTransmit_t, uint8_t size);   // initialize i2c with lcd

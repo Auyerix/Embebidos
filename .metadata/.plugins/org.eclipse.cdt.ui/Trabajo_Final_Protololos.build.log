@@ -1,0 +1,18 @@
+08:54:01 **** Incremental Build of configuration Debug for project Trabajo_Final_Protololos ****
+make -j1 all 
+arm-none-eabi-gcc "../Drivers/API/Src/API_lcd.c" -mcpu=cortex-m4 -std=gnu11 -g3 -DDEBUG -DUSE_HAL_DRIVER -DSTM32F401xE -c -I../Core/Inc -I../Drivers/STM32F4xx_HAL_Driver/Inc -I../Drivers/STM32F4xx_HAL_Driver/Inc/Legacy -I../Drivers/CMSIS/Device/ST/STM32F4xx/Include -I../Drivers/CMSIS/Include -I"/home/osboxes/Gustavo/Embebidos/PdM_workspace/Trabajo_Final_Protololos/Drivers" -I"/home/osboxes/Gustavo/Embebidos/PdM_workspace/Trabajo_Final_Protololos/Drivers/API/Inc" -I"/home/osboxes/Gustavo/Embebidos/PdM_workspace/Trabajo_Final_Protololos/Drivers/API" -O0 -ffunction-sections -fdata-sections -Wall -fstack-usage -fcyclomatic-complexity -MMD -MP -MF"Drivers/API/Src/API_lcd.d" -MT"Drivers/API/Src/API_lcd.o" --specs=nano.specs -mfpu=fpv4-sp-d16 -mfloat-abi=hard -mthumb -o "Drivers/API/Src/API_lcd.o"
+arm-none-eabi-gcc "../Drivers/API/Src/port.c" -mcpu=cortex-m4 -std=gnu11 -g3 -DDEBUG -DUSE_HAL_DRIVER -DSTM32F401xE -c -I../Core/Inc -I../Drivers/STM32F4xx_HAL_Driver/Inc -I../Drivers/STM32F4xx_HAL_Driver/Inc/Legacy -I../Drivers/CMSIS/Device/ST/STM32F4xx/Include -I../Drivers/CMSIS/Include -I"/home/osboxes/Gustavo/Embebidos/PdM_workspace/Trabajo_Final_Protololos/Drivers" -I"/home/osboxes/Gustavo/Embebidos/PdM_workspace/Trabajo_Final_Protololos/Drivers/API/Inc" -I"/home/osboxes/Gustavo/Embebidos/PdM_workspace/Trabajo_Final_Protololos/Drivers/API" -O0 -ffunction-sections -fdata-sections -Wall -fstack-usage -fcyclomatic-complexity -MMD -MP -MF"Drivers/API/Src/port.d" -MT"Drivers/API/Src/port.o" --specs=nano.specs -mfpu=fpv4-sp-d16 -mfloat-abi=hard -mthumb -o "Drivers/API/Src/port.o"
+arm-none-eabi-gcc -o "Trabajo_Final_Protololos.elf" @"objects.list"   -mcpu=cortex-m4 -T"/home/osboxes/Gustavo/Embebidos/PdM_workspace/Trabajo_Final_Protololos/STM32F401RETX_FLASH.ld" --specs=nosys.specs -Wl,-Map="Trabajo_Final_Protololos.map" -Wl,--gc-sections -static --specs=nano.specs -mfpu=fpv4-sp-d16 -mfloat-abi=hard -mthumb -u _printf_float -Wl,--start-group -lc -lm -Wl,--end-group
+Finished building target: Trabajo_Final_Protololos.elf
+ 
+arm-none-eabi-size   Trabajo_Final_Protololos.elf 
+   text	   data	    bss	    dec	    hex	filename
+  34888	    480	   2384	  37752	   9378	Trabajo_Final_Protololos.elf
+Finished building: default.size.stdout
+ 
+arm-none-eabi-objdump -h -S  Trabajo_Final_Protololos.elf  > "Trabajo_Final_Protololos.list"
+Finished building: Trabajo_Final_Protololos.list
+ 
+
+08:54:06 Build Finished. 0 errors, 0 warnings. (took 4s.981ms)
+

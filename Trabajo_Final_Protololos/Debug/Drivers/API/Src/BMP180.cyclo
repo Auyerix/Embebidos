@@ -1,0 +1,8 @@
+../Drivers/API/Src/BMP180.c:71:6:read_calibration_data	1
+../Drivers/API/Src/BMP180.c:93:10:Get_UTemp	1
+../Drivers/API/Src/BMP180.c:103:9:BMP180_GetTemp	1
+../Drivers/API/Src/BMP180.c:114:10:Get_UPress	5
+../Drivers/API/Src/BMP180.c:147:9:BMP180_GetPress	3
+../Drivers/API/Src/BMP180.c:174:9:BMP180_GetAlt	1
+../Drivers/API/Src/BMP180.c:180:6:BMP180_Start	1
+../Drivers/API/Src/BMP180.c:187:10:Get_ID	1

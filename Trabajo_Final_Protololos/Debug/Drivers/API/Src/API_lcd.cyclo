@@ -1,0 +1,6 @@
+../Drivers/API/Src/API_lcd.c:6:6:lcd_send_cmd	1
+../Drivers/API/Src/API_lcd.c:21:6:lcd_send_data	1
+../Drivers/API/Src/API_lcd.c:36:6:lcd_clear	2
+../Drivers/API/Src/API_lcd.c:45:6:lcd_init	1
+../Drivers/API/Src/API_lcd.c:73:6:lcd_send_string	2
+../Drivers/API/Src/API_lcd.c:78:6:welcome_message	1

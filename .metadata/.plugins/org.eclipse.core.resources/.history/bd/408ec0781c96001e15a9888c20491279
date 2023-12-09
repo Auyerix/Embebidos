@@ -1,0 +1,18 @@
+/*
+ * port.c
+ *
+ *  Created on: Dec 8, 2023
+ *      Author: osboxes
+ */
+
+#include <stdint.h>
+#include "stm32f4xx_hal.h"
+
+
+
+void i2c_lcd_transmit (uint8_t * dataTransmit_t, uint8_t size){
+
+
+
+
+}

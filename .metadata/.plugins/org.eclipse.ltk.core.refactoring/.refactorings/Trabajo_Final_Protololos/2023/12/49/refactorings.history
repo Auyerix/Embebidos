@@ -1,0 +1,3 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<session version="1.0">&#x0A;<refactoring comment="Rename resource &apos;Trabajo_Final_Protololos/Drivers/API/Inc/i2c-lcd.h&apos; to &apos;API_lcd.h&apos;" description="Rename resource &apos;i2c-lcd.h&apos;" flags="7" id="org.eclipse.ltk.core.refactoring.rename.resource" input="Drivers/API/Inc/i2c-lcd.h" name="API_lcd.h" stamp="1702122072472" updateReferences="true"/>&#x0A;<refactoring comment="Rename resource &apos;Trabajo_Final_Protololos/Drivers/API/Src/i2c-lcd.c&apos; to &apos;API_lcd.c&apos;" description="Rename resource &apos;i2c-lcd.c&apos;" flags="7" id="org.eclipse.ltk.core.refactoring.rename.resource" input="Drivers/API/Src/i2c-lcd.c" name="API_lcd.c" stamp="1702122102346" updateReferences="true"/>
+</session>

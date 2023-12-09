@@ -19,4 +19,6 @@ Autor: Gustavo Auyero
 		en la lectura de la presión no compensada
 05/12/23	Revisión Final Versión 0.10
 06/12/23	Revisión Final Versión 0.20
+09/12/23	Se agrega carpeta Trabajo_Final_Protocolos donde se sube el programa con la misma 
+		Funcionalidad pero aislando un módulo de comunicación con el LCD por medio de I2C
 
